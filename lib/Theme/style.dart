@@ -39,12 +39,13 @@ TextStyle blackBoldTextStyle ({required double fontSize,required BuildContext co
       "taleeq-bold");
 }
 
-TextStyle poppinsMediumTextStyle ({required double fontSize,required BuildContext context,Color ? color,double ? height}){
+TextStyle poppinsMediumTextStyle ({required double fontSize,required BuildContext context,Color ? color,double ? height,TextDecoration? decoration}){
   return TextStyle(
 
       color:(color!=null)?color: Theme.of(context).canvasColor,//Colors.black,
       fontSize: fontSize,
       height: (height!=null)?height:0,
+      decoration: decoration,
       fontFamily: "PoppinsMedium");
 }
 

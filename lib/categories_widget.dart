@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hi_erbil_mobile/categories_page.dart';
+import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
 
 import 'Theme/style.dart';
+import 'category_page.dart';
 import 'core/widgets/cached_net_work_image.dart';
 
 
@@ -13,12 +16,14 @@ class CategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    gridViewList.add( CategoriesListItem(title: "Restaurants",));
-    gridViewList.add( CategoriesListItem(title: "Malls",));
-    gridViewList.add( CategoriesListItem(title: "Real Estate",));
-    gridViewList.add( CategoriesListItem(title: "Mechanic",));
-    gridViewList.add( CategoriesListItem(title: "Hospitals",));
-    gridViewList.add( CategoriesListItem(type2: true,));
+    gridViewList.add( CategoriesListItem(title: "Restaurants",onTap: (){goTo(context, (context) => CategoryPage(title:"Restaurants" ,from: 1,));},));
+    gridViewList.add( CategoriesListItem(title: "Malls",onTap: (){goTo(context, (context) => CategoryPage(title:"Malls" ,from: 1));},));
+    gridViewList.add( CategoriesListItem(title: "Real Estate",onTap: (){goTo(context, (context) => CategoryPage(title:"Real Estate" ,from: 1,));},));
+    gridViewList.add( CategoriesListItem(title: "Mechanic",onTap: (){goTo(context, (context) => CategoryPage(title:"Mechanic" ,from: 1,));},));
+    gridViewList.add( CategoriesListItem(title: "Hospitals",onTap: (){goTo(context, (context) => CategoryPage(title:"Hospitals",from: 1 ,));},));
+    gridViewList.add( CategoriesListItem(type2: true,onTap: (){
+      goTo(context, (context) =>  const CategoriesPage());
+    },));
 
 
 
@@ -61,34 +66,38 @@ class CategoriesWidget extends StatelessWidget {
 }
 
 class CategoriesListItem extends StatelessWidget {
-  const CategoriesListItem({Key? key,this.type2, this.title}) : super(key: key);
+  const CategoriesListItem({Key? key,this.type2, this.title,required this.onTap}) : super(key: key);
   final bool ? type2;
   final String  ?title;
+  final Function () onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: 110,
-          height: 110,
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: BorderRadius.circular(10)
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Container(
+            width: 110,
+            height: 110,
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: BorderRadius.circular(10)
+            ),
+
+
+            child: (type2==null)?CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
+              boxFit: BoxFit.fill,url: null,):
+            Center(child: Text("More",style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
           ),
 
-
-          child: (type2==null)?CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
-            boxFit: BoxFit.fill,url: null,):
-          Center(child: Text("More",style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
-        ),
-
-        if(type2==null)
-        Padding(
-          padding: const EdgeInsets.only(top:5),
-          child: Text(title!,style: poppinsMediumTextStyle(fontSize: 12,context: context),),
-        )
-      ],
+          if(type2==null)
+          Padding(
+            padding: const EdgeInsets.only(top:5),
+            child: Text(title!,style: poppinsMediumTextStyle(fontSize: 12,context: context),),
+          )
+        ],
+      ),
     );
   }
 }

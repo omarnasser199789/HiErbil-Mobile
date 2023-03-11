@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hi_erbil_mobile/places_to_go_widget.dart';
 import 'package:hi_erbil_mobile/sights_widget.dart';
 
 import 'banner_widget.dart';
@@ -20,16 +21,22 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children:  [
-            HeaderWidget(),
+            const HeaderWidget(),
 
-            BannerWidget(),
+             Padding(
+               padding: const EdgeInsets.only(top:26),
+               child: BannerWidget(padding: const EdgeInsets.only(left: 17,right: 17),height: 210,borderRadius: BorderRadius.circular(10),),
+             ),
 
             CategoriesWidget(),
 
             SightsWidget(),
-            HistoryWidget(),
 
-            // PlacesToGoWidget(),
+            const HistoryWidget(),
+
+            const PlacesToGoWidget(),
+
+            const SizedBox(height: 100,),
 
 
           ],

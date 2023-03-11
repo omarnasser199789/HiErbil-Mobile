@@ -45,6 +45,8 @@ dependencies:
   cached_network_image: ^3.2.2
   carousel_slider: ^4.2.1
   animation_wrappers: ^3.0.0
+  favorite_button: ^0.0.4
+  google_maps_flutter: ^2.2.0
   flutter_localizations:
     sdk: flutter
   http: ^0.13.5

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hi_erbil_mobile/Theme/style.dart';
 
 import 'core/widgets/custom_text_field.dart';
 
@@ -10,6 +11,7 @@ class HeaderWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
+      bottom: false,
       child: Container(
         height: 65,
         color: Theme.of(context).cardColor,
@@ -29,7 +31,7 @@ class HeaderWidget extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(15),
-                      child: SvgPicture.asset("assets/svg/bill.svg"),
+                      child: SvgPicture.asset("assets/svg/bill.svg",color: iconsColor,),
                     )),
 
 

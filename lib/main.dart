@@ -11,6 +11,8 @@ import 'injection_container.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'  as flutter_localizations;
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'nav_page.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
@@ -92,7 +94,7 @@ class LaunchPage extends StatelessWidget {
                         Locale('fa'),
                       ],
                       locale: locale,
-                      home:  const HomePage(),
+                      home:  const NavPage(),
 
                     );
 

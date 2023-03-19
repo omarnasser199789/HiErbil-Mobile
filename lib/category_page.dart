@@ -65,47 +65,47 @@ class CategoryPage extends StatelessWidget {
 
     }
 
-    Size size = MediaQuery.of(context).size;
+      Size size = MediaQuery.of(context).size;
 
 
-    return Scaffold(
-      appBar: appBarWidgetType3(title, context, true, [], null),
-      body: Padding(
-        padding: const EdgeInsets.only(top:10),
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
-            borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+      return Scaffold(
+        appBar: appBarWidgetType3(title, context,(from==0)? false:true, [], null),
+        body: Padding(
+          padding: const EdgeInsets.only(top:10),
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Theme.of(context).cardColor,
+              borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            ),
+            child: DefaultTabController(
+                length: tabs.length,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10, bottom: 10),
+                      child: TabBar(
+                        isScrollable: true,
+                        labelColor: Theme.of(context).canvasColor,
+                        unselectedLabelColor: iconsColor,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        labelStyle:
+                            poppinsRegularTextStyle(fontSize: 12, context: context),
+                        tabs: tabs,
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height - 188,
+                      child: TabBarView(
+                        children: tabBarViewList,
+                      ),
+                    ),
+                  ],
+                )),
           ),
-          child: DefaultTabController(
-              length: tabs.length,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10, bottom: 10),
-                    child: TabBar(
-                      isScrollable: true,
-                      labelColor: Theme.of(context).canvasColor,
-                      unselectedLabelColor: iconsColor,
-                      indicatorSize: TabBarIndicatorSize.tab,
-                      labelStyle:
-                          poppinsRegularTextStyle(fontSize: 12, context: context),
-                      tabs: tabs,
-                    ),
-                  ),
-                  SizedBox(
-                    height: size.height - 188,
-                    child: TabBarView(
-                      children: tabBarViewList,
-                    ),
-                  ),
-                ],
-              )),
         ),
-      ),
-    );
+      );
   }
 
 }

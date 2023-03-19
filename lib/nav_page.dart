@@ -4,10 +4,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hi_erbil_mobile/home_page.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/pages/home_page.dart';
 import 'package:hi_erbil_mobile/posts_page.dart';
+import 'package:hi_erbil_mobile/wishlist_page.dart';
 import 'Locale/locale.dart';
 import 'Theme/style.dart';
+import 'about_page.dart';
 import 'category_page.dart';
 import 'core/globals.dart';
 import 'core/widgets/double_back_to_close_widget.dart';
@@ -185,9 +187,9 @@ class _NavPageState extends State<NavPage> {
       case 2:
         return   Container();
       case 3:
-        return  Container();
+        return const WishlistPage();
       case 4:
-        return  Container();
+        return  AboutPage();
 
       default:
         return Container();

@@ -2,6 +2,13 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/globals.dart';
+import 'features/home/data/data_source/remot_data_sourse/home_remot_data_source.dart';
+import 'features/home/data/repositories/home_repository_impl.dart';
+import 'features/home/domain/repositories/home_repository.dart';
+import 'features/home/domain/usecase/get_banners_usecase.dart';
+import 'features/home/domain/usecase/get_categories_usecase.dart';
+import 'features/home/domain/usecase/get_places_usecase.dart';
+import 'features/home/presentation/bloc/home_bloc.dart';
 
 
 
@@ -10,29 +17,27 @@ final sl = GetIt.instance;
 
 Future<void> init() async {
   ///Bloc
-  // sl.registerFactory(
-  //   () => AuthBloc(concreteLoginUseCase: sl(),
-  //   ),
-  // );
-  // sl.registerFactory(
-  //   () => TransactionBloc(concreteTransactionUseCase: sl(),
-  //   ),
-  // );
+  sl.registerFactory(
+    () => HomeBloc(
+      concreteGetBannersUseCase: sl(),
+      concreteGetCategoriesUseCase: sl(),
+      concreteGetPlacesUseCase: sl(),
+    ),
+  );
+
 
   ///Use cases
-
-  // sl.registerLazySingleton(() => LoginUseCase(repository: sl()));
-  // sl.registerLazySingleton(() => GetTransactionStatementsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetBannersUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetPlacesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetCategoriesUseCase(repository: sl()));
 
 
   ///Repository
 
-  // sl.registerLazySingleton<AuthRepository>(
-  //   () => AuthRepositoryImpl(authRemoteDataSource: sl(),),
-  // );
-  // sl.registerLazySingleton<TransactionRepository>(
-  //       () => TransactionRepositoryImpl(transactionRemoteDataSource: sl(),),
-  // );
+  sl.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(homeRemoteDataSource: sl(),),
+  );
+
 
 
 
@@ -44,11 +49,11 @@ Future<void> init() async {
   ///Data sources
 
 
-  // sl.registerLazySingleton<AuthRemoteDataSource>(
-  //   () => AuthRemoteDataSourceImpl( client: sl(),
-  //   ),
-  // );
-  //
+  sl.registerLazySingleton<HomeRemoteDataSource>(
+    () => HomeRemoteDataSourceImpl( client: sl(),
+    ),
+  );
+
   // sl.registerLazySingleton<TransactionRemoteDataSource>(
   //       () => TransactionRemoteDataSourceImpl( client: sl(),
   //   ),

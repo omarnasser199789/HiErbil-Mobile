@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hi_erbil_mobile/places_to_go_widget.dart';
-import 'package:hi_erbil_mobile/sights_widget.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/widgets/places_to_go_widget.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/widgets/sights_widget.dart';
 
-import 'banner_widget.dart';
-import 'categories_widget.dart';
-import 'header_widget.dart';
-import 'history_widget.dart';
+import '../widgets/banner_widget.dart';
+import '../widgets/categories_widget.dart';
+import '../../../../header_widget.dart';
+import '../../../../history_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,6 +17,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -32,9 +34,13 @@ class _HomePageState extends State<HomePage> {
 
             SightsWidget(),
 
-            const HistoryWidget(),
 
-            const PlacesToGoWidget(),
+
+
+
+
+
+             PlacesToGoWidget(),
 
             const SizedBox(height: 100,),
 

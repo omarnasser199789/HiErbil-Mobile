@@ -6,7 +6,7 @@ import 'Theme/theme_notifier.dart';
 import 'Theme/theme_values.dart';
 import 'core/globals.dart';
 import 'package:provider/provider.dart';
-import 'home_page.dart';
+import 'features/home/presentation/pages/home_page.dart';
 import 'injection_container.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'  as flutter_localizations;
 import 'package:flutter_bloc/flutter_bloc.dart';

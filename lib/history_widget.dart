@@ -3,11 +3,13 @@ import 'package:hi_erbil_mobile/Theme/style.dart';
 import 'package:hi_erbil_mobile/core/widgets/custom_botton.dart';
 
 import 'core/widgets/cached_net_work_image.dart';
+import 'features/home/data/models/places_model.dart';
 
 class HistoryWidget extends StatelessWidget {
 
-  const HistoryWidget({Key? key}) : super(key: key);
+  const HistoryWidget({Key? key,required this.mainItem}) : super(key: key);
 
+  final Datum mainItem;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +20,7 @@ class HistoryWidget extends StatelessWidget {
             height: 502,
             width: double.infinity,
             child: CachedNetWorkImage(borderRadius: BorderRadius.circular(0),
-              boxFit: BoxFit.fill,url: null,),
+              boxFit: BoxFit.fill,url: (mainItem.attachments.isNotEmpty)?mainItem.attachments[0].path:null,),
           ),
           Container(
             height: 502,

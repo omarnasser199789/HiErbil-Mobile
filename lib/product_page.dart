@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 
-import 'banner_widget.dart';
+import 'features/home/presentation/widgets/banner_widget.dart';
 import 'core/widgets/app_bar_type3.dart';
 import 'core/widgets/cached_net_work_image.dart';
 import 'core/widgets/description_widget.dart';

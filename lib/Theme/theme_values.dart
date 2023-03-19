@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 const bluePrimary = Color(0xFFEC5252);
 const blueAccent = Color(0xFF4D5BBF);
 const blueBackground = Color(0xFFFFFFFF);
-Color primaryColor = Colors.blue;
+Color primaryColor = Color.fromRGBO(50, 151, 147, 1);
 String primaryColorTypeString ="";
 Color scaffoldBackgroundColorForLightTheme = const Color(0xFFF8F8F8);
 Color scaffoldBackgroundColorForDarkTheme = const Color(0xFF0F0F0F);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'category_section.dart';
+import 'features/home/presentation/widgets/category_section.dart';
 import 'core/widgets/app_bar_type3.dart';
 
 class CategoriesPage extends StatelessWidget {

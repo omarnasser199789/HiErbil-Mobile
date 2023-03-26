@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'Theme/style.dart';
+import '../../../../Theme/style.dart';
 import 'category_page.dart';
-import 'core/widgets/app_bar_widget.dart';
-import 'core/widgets/cached_net_work_image.dart';
-import 'core/widgets/custom_botton.dart';
+import '../../../posts/presentation/pages/posts_page.dart';
+import '../../../../core/widgets/app_bar_widget.dart';
+import '../../../../core/widgets/cached_net_work_image.dart';
+import '../../../../core/widgets/custom_botton.dart';
 
 class CategorySection extends StatelessWidget {
   const CategorySection({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class CategorySection extends StatelessWidget {
               itemBuilder: (BuildContext ctx, index) {
                 return GestureDetector(
                   onTap: (){
-                    goTo(context, (context) => CategoryPage(title:"Restaurants" ,from: 1,));
+                    goTo(context, (context) => CategoryPage(title:"Restaurants", id: -1,));
                   },
                   child: Column(
 

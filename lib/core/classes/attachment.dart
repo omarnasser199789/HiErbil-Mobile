@@ -18,13 +18,13 @@ class Attachment {
   int createdBy;
 
   factory Attachment.fromJson(Map<String, dynamic> json) => Attachment(
-    id: json["id"],
-    objectId: json["objectId"],
-    objectTable: json["objectTable"],
-    path: json["path"],
-    deleted: json["deleted"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    createdBy: json["createdBy"],
+    id: json["id"]??-1,
+    objectId: json["objectId"]??-1,
+    objectTable: json["objectTable"]??"",
+    path: json["path"]??"",
+    deleted: json["deleted"]??false,
+    createdAt: (json["createdAt"]!=null)?DateTime.parse(json["createdAt"]):DateTime.now(),
+    createdBy: json["createdBy"]??-1,
   );
 
   Map<String, dynamic> toJson() => {

@@ -57,12 +57,12 @@ class Datum {
   List<Attachment> attachments;
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-    id: json["id"],
-    link: json["link"],
-    deleted: json["deleted"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    createdBy: json["createdBy"],
-    attachments: List<Attachment>.from(json["attachments"].map((x) => Attachment.fromJson(x))),
+    id: json["id"]?? -1,
+    link: json["link"]??"",
+    deleted: json["deleted"]??false,
+    createdAt:(json["createdAt"]!=null)? DateTime.parse(json["createdAt"]):DateTime.now(),
+    createdBy: json["createdBy"]??-1,
+    attachments:(json["attachments"]!=null)? List<Attachment>.from(json["attachments"].map((x) => Attachment.fromJson(x))):[],
   );
 
   Map<String, dynamic> toJson() => {

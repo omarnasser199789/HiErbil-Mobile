@@ -9,6 +9,11 @@ import 'features/home/domain/usecase/get_banners_usecase.dart';
 import 'features/home/domain/usecase/get_categories_usecase.dart';
 import 'features/home/domain/usecase/get_places_usecase.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/posts/data/data_source/remot_data_sourse/posts_remot_data_source.dart';
+import 'features/posts/data/repositories/posts_repository_impl.dart';
+import 'features/posts/domain/repositories/posts_repository.dart';
+import 'features/posts/domain/usecase/get_blog_categories_usecase.dart';
+import 'features/posts/presentation/bloc/posts_bloc.dart';
 
 
 
@@ -24,12 +29,18 @@ Future<void> init() async {
       concreteGetPlacesUseCase: sl(),
     ),
   );
+  sl.registerFactory(
+    () => PostsBloc(
+      concreteGetBlogCategoriesUseCase: sl(),
+    ),
+  );
 
 
   ///Use cases
   sl.registerLazySingleton(() => GetBannersUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetPlacesUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetCategoriesUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetBlogCategoriesUseCase(repository: sl()));
 
 
   ///Repository
@@ -38,6 +49,9 @@ Future<void> init() async {
     () => HomeRepositoryImpl(homeRemoteDataSource: sl(),),
   );
 
+  sl.registerLazySingleton<PostsRepository>(
+        () => PostsRepositoryImpl(postsRemoteDataSource: sl(),),
+  );
 
 
 
@@ -51,6 +65,10 @@ Future<void> init() async {
 
   sl.registerLazySingleton<HomeRemoteDataSource>(
     () => HomeRemoteDataSourceImpl( client: sl(),
+    ),
+  );
+  sl.registerLazySingleton<PostRemoteDataSource>(
+        () => PostsRemoteDataSourceImpl( client: sl(),
     ),
   );
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 import 'package:hi_erbil_mobile/core/widgets/custom_botton.dart';
 
+import 'core/globals.dart';
 import 'core/widgets/cached_net_work_image.dart';
 import 'features/home/data/models/places_model.dart';
 
@@ -20,7 +21,7 @@ class HistoryWidget extends StatelessWidget {
             height: 502,
             width: double.infinity,
             child: CachedNetWorkImage(borderRadius: BorderRadius.circular(0),
-              boxFit: BoxFit.fill,url: (mainItem.attachments.isNotEmpty)?mainItem.attachments[0].path:null,),
+              boxFit: BoxFit.fill,url: (mainItem.attachments.isNotEmpty)?s3Amazonaws+mainItem.attachments[0].path:null,),
           ),
           Container(
             height: 502,

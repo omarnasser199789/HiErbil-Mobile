@@ -10,3 +10,13 @@ showMessage( { required String  message,required BuildContext context,Color ? bg
         .show(context);
   });
 }
+
+String getTimeAgo(DateTime dateTime) {
+  Duration timeDifference = DateTime.now().difference(dateTime);
+  int minutes = timeDifference.inMinutes;
+  if(minutes>60){
+   return dateTime.toString();
+  }else{
+    return '$minutes min ago';
+  }
+}

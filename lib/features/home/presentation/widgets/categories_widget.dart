@@ -6,12 +6,13 @@ import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
 
 import '../../../../Theme/style.dart';
-import '../../../../category_page.dart';
+import '../../../posts/presentation/pages/posts_page.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../injection_container.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
+import 'category_page.dart';
 
 
 class CategoriesWidget extends StatelessWidget {
@@ -42,14 +43,10 @@ class CategoriesWidget extends StatelessWidget {
                   CategoriesListItem(
                     title: item.title,
                     image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
-                    onTap: (){goTo(context, (context) => CategoryPage(title:item.title ,from: 1,));},));
+                    onTap: (){goTo(context, (context) => CategoryPage(title:item.title,id:item.id));},));
 
             }
-            // gridViewList.add( CategoriesListItem(title: "Malls",onTap: (){goTo(context, (context) => CategoryPage(title:"Malls" ,from: 1));},));
-            // gridViewList.add( CategoriesListItem(title: "Real Estate",onTap: (){goTo(context, (context) => CategoryPage(title:"Real Estate" ,from: 1,));},));
-            // gridViewList.add( CategoriesListItem(title: "Mechanic",onTap: (){goTo(context, (context) => CategoryPage(title:"Mechanic" ,from: 1,));},));
-            // gridViewList.add( CategoriesListItem(title: "Hospitals",onTap: (){goTo(context, (context) => CategoryPage(title:"Hospitals",from: 1 ,));},));
-            //
+
             gridViewList.add( CategoriesListItem(type2: true,onTap: (){
               goTo(context, (context) =>  const CategoriesPage());
             },));

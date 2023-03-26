@@ -10,9 +10,9 @@ import 'package:hi_erbil_mobile/wishlist_page.dart';
 import 'Locale/locale.dart';
 import 'Theme/style.dart';
 import 'about_page.dart';
-import 'category_page.dart';
 import 'core/globals.dart';
 import 'core/widgets/double_back_to_close_widget.dart';
+import 'features/posts/presentation/pages/posts_page.dart';
 
 
 
@@ -183,7 +183,7 @@ class _NavPageState extends State<NavPage> {
       case 0:
         return const HomePage();
       case 1:
-        return  CategoryPage(title: 'Posts',from: 0);
+        return  PostsPage(title: 'Posts');
       case 2:
         return   Container();
       case 3:

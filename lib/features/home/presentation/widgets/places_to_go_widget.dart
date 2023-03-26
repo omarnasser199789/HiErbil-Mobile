@@ -40,13 +40,14 @@ class PlacesToGoWidget extends StatelessWidget {
           if (state is SuccessGetPlaces) {
 
             for(var item in state.placesEntity.data){
-              if(item.isMain){
+              if(item.isMain==true){
                 mainItem = item;
               }
             }
 
             return Column(
               children: [
+                if(mainItem.id!=-1)
                 HistoryWidget(mainItem: mainItem),
                 Padding(
                   padding: const EdgeInsets.only(left: 17,right: 17),

@@ -1,0 +1,33 @@
+import 'package:dartz/dartz.dart';
+import '../../../../core/error/failures.dart';
+import '../../domain/entities/blog_categories_entity.dart';
+import '../../domain/repositories/posts_repository.dart';
+import '../data_source/remot_data_sourse/posts_remot_data_source.dart';
+import 'convert_to.dart';
+
+
+
+
+
+
+class PostsRepositoryImpl implements PostsRepository{
+
+  final PostRemoteDataSource postsRemoteDataSource;
+
+
+  PostsRepositoryImpl({
+
+   required  this.postsRemoteDataSource,
+});
+
+
+  @override
+  Future<Either<Failure,BlogCategoriesEntity>> getBlogCategories() async {
+    return await convertToBlogCategoriesEntity((){
+      return postsRemoteDataSource.getBlogCategories();
+    });
+
+  }
+
+
+}

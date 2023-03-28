@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/banners_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/categories_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/places_entity.dart';
+import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/globals.dart';
@@ -34,6 +35,16 @@ Stream<HomeState> SuccessGetPlacesOrErrorState(
     (failure) => Error(message: mapFailureToMessage(failure)),
     (placesEntity) => SuccessGetPlaces(
         placesEntity:placesEntity
+    ),
+  );
+}
+Stream<HomeState> SuccessGetTagsOrErrorState(
+  Either<Failure, TagsEntity> failureOrSuccess,
+) async* {
+  yield failureOrSuccess.fold(
+    (failure) => Error(message: mapFailureToMessage(failure)),
+    (tagsEntity) => SuccessGetTags(
+        tagsEntity:tagsEntity
     ),
   );
 }

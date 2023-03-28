@@ -43,7 +43,12 @@ class CategoriesWidget extends StatelessWidget {
                   CategoriesListItem(
                     title: item.title,
                     image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
-                    onTap: (){goTo(context, (context) => CategoryPage(title:item.title,id:item.id));},));
+                    onTap: (){
+
+                      goTo(context, (context) =>
+                          CategoryPage(title:item.title,id:item.id));
+
+                      },));
 
             }
 
@@ -118,8 +123,10 @@ class CategoriesListItem extends StatelessWidget {
             ),
 
 
-            child: (type2==null)?CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
-              boxFit: BoxFit.fill,url: image,):
+            child: (type2==null)?
+            CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
+              boxFit: BoxFit.fill,url: image,
+            ):
             Center(child: Text("More",style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
           ),
 

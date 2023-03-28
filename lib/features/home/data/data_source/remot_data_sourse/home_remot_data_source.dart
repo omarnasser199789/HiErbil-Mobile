@@ -7,6 +7,7 @@ import '../../../domain/entities/banners_entity.dart';
 import '../../../domain/usecase/get_places_usecase.dart';
 import '../../models/categories_model.dart';
 import '../../models/places_model.dart';
+import '../../models/tags_model.dart';
 import 'home_remote_data_functions.dart';
 
 abstract class HomeRemoteDataSource {
@@ -15,6 +16,7 @@ abstract class HomeRemoteDataSource {
   Future<BannersModel> getBanners();
   Future<CategoriesModel> getCategories();
   Future<PlacesModel> getPlaces(GetPlacesParams params);
+  Future<TagsModel> getTags(int catId);
 
 
 
@@ -53,6 +55,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       return functions.getPlaces('$baseUrl/place?pageSize=10&page=0');
     }
 
+  }
+
+  @override
+  Future<TagsModel> getTags(int catId) {
+    return functions.getTags('$baseUrl/tag?pageSize=10&page=0&categoryId=$catId');
   }
 
 

@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
+import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_type3.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../global_style.dart';
@@ -42,43 +44,48 @@ class _CategoryPageState extends State<CategoryPage> {
           }
 
           if (state is Empty) {
-            // BlocProvider.of<PostsBloc>(context).add(GetBlogCategoriesEvent());/// => SuccessGetBlogCategories
+            BlocProvider.of<HomeBloc>(context).add(GetTagsEvent(catId: widget.id));/// => SuccessGetBlogCategories
           }
 
-          tabs = [];
-          for (var item in ["","",""]) {
-            tabs.add(
-              Tab(
-                height: 80,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CachedNetWorkImage(
-                          borderRadius: BorderRadius.circular(10),
-                          boxFit: BoxFit.fill,
-                          url:null,
+          if(state is SuccessGetTags){
+            tabs = [];
+            for (var item in state.tagsEntity.data) {
+              tabs.add(
+                Tab(
+                  height: 80,
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CachedNetWorkImage(
+                            borderRadius: BorderRadius.circular(10),
+                            boxFit: BoxFit.fill,
+                            url:(item.attachments.isNotEmpty)? s3Amazonaws + item.attachments[0].path:null,
+                          ),
                         ),
-                      ),
-                      Text("item.title", maxLines: 1),
-                    ],
+                        Text(item.title, maxLines: 1),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
+              );
 
 
 
-            tabBarViewList.add( GlobalStyle());
+              tabBarViewList.add( GlobalStyle());
 
 
 
 
 
+            }
           }
+
+
+
 
           return Scaffold(
             appBar: appBarWidgetType3(widget.title, context,true, [], null),

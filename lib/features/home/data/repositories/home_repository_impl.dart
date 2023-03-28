@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/categories_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/places_entity.dart';
+import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
 
 import '../../../../core/error/failures.dart';
@@ -45,6 +46,13 @@ class HomeRepositoryImpl implements HomeRepository{
   Future<Either<Failure, PlacesEntity>> getPlaces(GetPlacesParams params)async {
     return await convertToPlacesEntity((){
       return homeRemoteDataSource.getPlaces(params);
+    });
+  }
+
+  @override
+  Future<Either<Failure, TagsEntity>> getTags(int catId) async{
+    return await convertToTagsEntity((){
+      return homeRemoteDataSource.getTags(catId);
     });
   }
 

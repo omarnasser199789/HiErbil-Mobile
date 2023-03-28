@@ -11,6 +11,10 @@ abstract class HomeEvent {}
 
 class GetBannersEvent extends HomeEvent {}
 class GetCategoriesEvent extends HomeEvent {}
+class GetTagsEvent extends HomeEvent {
+  int catId;
+  GetTagsEvent({required this.catId});
+}
 class GetPlacesEvent extends HomeEvent {
   GetPlacesEvent({required this.params});
   GetPlacesParams  params;

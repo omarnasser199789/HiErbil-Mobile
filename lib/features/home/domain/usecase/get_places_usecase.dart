@@ -22,5 +22,6 @@ class GetPlacesUseCase implements UseCase<PlacesEntity, GetPlacesParams> {
 
 class GetPlacesParams{
   String ? type;
-  GetPlacesParams({this.type});
+  String ? text;
+  GetPlacesParams({this.type, this.text});
 }

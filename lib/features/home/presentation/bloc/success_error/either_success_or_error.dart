@@ -6,6 +6,7 @@ import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/globals.dart';
+import '../../../domain/entities/place_entity.dart';
 import '../home_state.dart';
 
 Stream<HomeState> SuccessGetBannersOrErrorState(
@@ -45,6 +46,17 @@ Stream<HomeState> SuccessGetTagsOrErrorState(
     (failure) => Error(message: mapFailureToMessage(failure)),
     (tagsEntity) => SuccessGetTags(
         tagsEntity:tagsEntity
+    ),
+  );
+}
+
+Stream<HomeState> SuccessGetPlaceOrErrorState(
+  Either<Failure, PlaceEntity> failureOrSuccess,
+) async* {
+  yield failureOrSuccess.fold(
+    (failure) => Error(message: mapFailureToMessage(failure)),
+    (placeEntity) => SuccessGetPlace(
+        placeEntity:placeEntity
     ),
   );
 }

@@ -10,12 +10,12 @@ import '../entities/tags_entity.dart';
 import '../repositories/home_repository.dart';
 
 
-class GetTagsUseCase implements UseCase<TagsEntity, int> {
+class GetTagsUseCase implements UseCase<TagsEntity, int?> {
   final HomeRepository repository;
   GetTagsUseCase({required this.repository});
 
   @override
-  Future<Either<Failure,TagsEntity>> call(int catId) {
+  Future<Either<Failure,TagsEntity>> call(int? catId) {
 
     return repository.getTags(catId);
   }

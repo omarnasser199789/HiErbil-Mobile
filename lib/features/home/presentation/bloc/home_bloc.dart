@@ -3,6 +3,7 @@ import 'package:hi_erbil_mobile/features/home/presentation/bloc/success_error/ei
 
 import '../../domain/usecase/get_banners_usecase.dart';
 import '../../domain/usecase/get_categories_usecase.dart';
+import '../../domain/usecase/get_place_by_id_usecase.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../../domain/usecase/get_tags_usecase.dart';
 import 'bloc.dart';
@@ -12,6 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetCategoriesUseCase getCategoriesUseCase;
   final GetPlacesUseCase getPlacesUseCase;
   final GetTagsUseCase getTagsUseCase;
+  final GetPlaceByIdUseCase getPlaceByIdUseCase;
 
 
 
@@ -21,6 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required GetCategoriesUseCase concreteGetCategoriesUseCase,
     required GetPlacesUseCase concreteGetPlacesUseCase,
     required GetTagsUseCase concreteGetTagsUseCase,
+    required GetPlaceByIdUseCase concreteGetPlaceByIdUseCase,
 
 
 
@@ -32,6 +35,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         getCategoriesUseCase = concreteGetCategoriesUseCase,
         getPlacesUseCase = concreteGetPlacesUseCase,
         getTagsUseCase = concreteGetTagsUseCase,
+        getPlaceByIdUseCase = concreteGetPlaceByIdUseCase,
 
 
 
@@ -59,6 +63,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield Loading();
       final failureOrPhysician = await getTagsUseCase(event.catId);
       yield* SuccessGetTagsOrErrorState(failureOrPhysician);
+    }
+    if(event is GetPlaceEvent){
+      yield Loading();
+      final failureOrPhysician = await getPlaceByIdUseCase(event.id);
+      yield* SuccessGetPlaceOrErrorState(failureOrPhysician);
     }
 
 

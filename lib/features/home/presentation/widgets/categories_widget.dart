@@ -5,6 +5,7 @@ import 'package:hi_erbil_mobile/categories_page.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
 import '../../../posts/presentation/pages/posts_page.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
@@ -24,6 +25,7 @@ class CategoriesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locale = AppLocalizations.of(context)!;
 
 
     return BlocProvider(
@@ -38,31 +40,51 @@ class CategoriesWidget extends StatelessWidget {
             BlocProvider.of<HomeBloc>(context).add(GetCategoriesEvent());
           }
           if(state is SuccessGetCategories ){
-            for(var item in state.categoriesEntity.data){
-              gridViewList.add(
-                  CategoriesListItem(
-                    title: item.title,
-                    image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
-                    onTap: (){
 
-                      goTo(context, (context) =>
-                          CategoryPage(title:item.title,id:item.id));
+            if(state.categoriesEntity.data.length>5){
+              for(int i=0; i<5; i++){
+                gridViewList.add(
+                    CategoriesListItem(
+                      title: state.categoriesEntity.data[i].title,
+                      image:(state.categoriesEntity.data[i].attachments.isNotEmpty)? s3Amazonaws+state.categoriesEntity.data[i].attachments[0].path:null,
+                      onTap: (){
+
+                        goTo(context, (context) =>
+                            CategoryPage(title:state.categoriesEntity.data[i].title,id:state.categoriesEntity.data[i].id));
+
+                      },));
+              }
+
+
+            }else{
+
+              for(var item in state.categoriesEntity.data){
+                gridViewList.add(
+                    CategoriesListItem(
+                      title: item.title,
+                      image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
+                      onTap: (){
+
+                        goTo(context, (context) =>
+                            CategoryPage(title:item.title,id:item.id));
 
                       },));
 
+              }
             }
 
+
             gridViewList.add( CategoriesListItem(type2: true,onTap: (){
-              goTo(context, (context) =>  const CategoriesPage());
+              goTo(context, (context) =>   CategoriesPage(categoriesEntity:state.categoriesEntity));
             },));
 
 
 
-            widgetList.add(Text("Categories",style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
+            widgetList.add(Text(locale.categories!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
 
             widgetList.add(
                 Padding(
-                  padding: const EdgeInsets.only(top: 16),
+                  padding: const EdgeInsets.only(top: 16,bottom: 16),
                   child: GridView.builder(
                       padding: const EdgeInsets.all(0),
                       physics: const NeverScrollableScrollPhysics(),
@@ -113,10 +135,11 @@ class CategoriesListItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: 110,
-            height: 110,
+            height: 108,
             decoration: BoxDecoration(
               color: Theme.of(context).cardColor,
               borderRadius: BorderRadius.circular(10)

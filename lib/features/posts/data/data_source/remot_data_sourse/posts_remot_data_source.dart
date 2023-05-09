@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:hi_erbil_mobile/features/posts/data/models/post_model.dart';
 import 'package:http/http.dart' as http;
 import '../../../../../core/globals.dart';
 import '../../../domain/entities/blog_categories_entity.dart';
@@ -9,6 +10,7 @@ abstract class PostRemoteDataSource {
 
 
   Future<BlogCategoriesModel> getBlogCategories();
+  Future<PostModel> getPost(int id);
 
 
 
@@ -32,6 +34,11 @@ class PostsRemoteDataSourceImpl implements PostRemoteDataSource {
   Future<BlogCategoriesModel> getBlogCategories() {
 
     return functions.getBanners('$baseUrl/BlogCategory?pageSize=10&page=0');
+  }
+
+  @override
+  Future<PostModel> getPost(int id) {
+    return functions.getPost('$baseUrl/Post/$id');
   }
 
 

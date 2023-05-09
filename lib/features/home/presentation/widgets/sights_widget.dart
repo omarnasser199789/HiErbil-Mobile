@@ -5,9 +5,12 @@ import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
 import '../../../../Theme/style.dart';
+import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
+import '../../../../core/widgets/waiting_widget.dart';
 import '../../../../history_widget.dart';
 import '../../../../injection_container.dart';
+import '../../../../product_page.dart';
 import '../../data/models/places_model.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
@@ -38,12 +41,27 @@ class SightsWidget extends StatelessWidget {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params: GetPlacesParams(type: "Sight")));
           }
+          if(state is Loading){
+            return const WaitingWidget();
+          }
+
           if (state is SuccessGetPlaces) {
 
 
             for(var item in state.placesEntity.data){
 
-                rowList.add(SightsItemList(image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,));
+                rowList.add(GestureDetector(
+                  onTap: (){
+                    goTo(context, (context) =>  ProductPage(title: item.title,
+                      id: item.id,));
+                  },
+                  child: SightsItemList(
+                    image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
+                    title: item.title,
+                    address: item.address,
+
+                  ),
+                ));
 
 
             }
@@ -83,8 +101,10 @@ class SightsWidget extends StatelessWidget {
 }
 
 class SightsItemList extends StatelessWidget {
-  const SightsItemList({Key? key,this.image}) : super(key: key);
+  const SightsItemList({Key? key,this.image, required this.title,required this.address}) : super(key: key);
   final String ? image;
+  final String  title;
+  final String  address;
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +123,9 @@ class SightsItemList extends StatelessWidget {
 
           Padding(
             padding: const EdgeInsets.only(top:9,bottom: 3),
-            child: Text("Bexal",style: poppinsMediumTextStyle(fontSize: 16, context: context),),
+            child: Text(title,style: poppinsMediumTextStyle(fontSize: 16, context: context),),
           ),
-          Text("Erbil, Rwandz",style: poppinsMediumTextStyle(fontSize: 14, context: context),),
+          Text(address,style: poppinsMediumTextStyle(fontSize: 14, context: context),),
         ],
       ),
     );

@@ -4,6 +4,8 @@
 
 
 
+import 'package:hi_erbil_mobile/features/posts/domain/entities/post_entity.dart';
+
 import '../../domain/entities/blog_categories_entity.dart';
 
 abstract class PostState {}
@@ -14,6 +16,11 @@ class Loading extends PostState {}
 class SuccessGetBlogCategories extends PostState {
   BlogCategoriesEntity params;
   SuccessGetBlogCategories({required this.params});
+}
+
+class SuccessGetPost extends PostState {
+  PostEntity params;
+  SuccessGetPost({required this.params});
 }
 
 

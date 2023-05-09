@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import 'Locale/language_cubit.dart';
 import 'Locale/locale.dart';
@@ -7,6 +8,7 @@ import 'Theme/theme_values.dart';
 import 'core/globals.dart';
 import 'package:provider/provider.dart';
 import 'features/home/presentation/pages/home_page.dart';
+import 'features/map/presentation/pages/mpa_page.dart';
 import 'injection_container.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'  as flutter_localizations;
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +43,7 @@ class LaunchPage extends StatelessWidget {
     }
 
     return BlocProvider<LanguageCubit>(
-      create: (context) => LanguageCubit(Locale(lang)),
+      create: (context) => LanguageCubit(Locale(lang)),//Locale(lang)
       child: BlocBuilder<LanguageCubit, Locale>(
           builder: (context, locale) =>
 
@@ -52,7 +54,7 @@ class LaunchPage extends StatelessWidget {
 
 
                     return MaterialApp(
-                      title: 'YBS',
+                      title: 'Hi Erbil',
                       debugShowCheckedModeBanner: false,
                       themeMode: currentMode,
                       theme: themeNotifier_.getTheme(),
@@ -95,6 +97,7 @@ class LaunchPage extends StatelessWidget {
                       ],
                       locale: locale,
                       home:  const NavPage(),
+                      // home: MapPage(markers:Set<Marker>() ),
 
                     );
 

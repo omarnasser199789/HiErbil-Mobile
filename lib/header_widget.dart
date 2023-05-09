@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 
+import 'Locale/locale.dart';
 import 'core/widgets/custom_text_field.dart';
 
 class HeaderWidget extends StatelessWidget {
-  const HeaderWidget({Key? key}) : super(key: key);
+   HeaderWidget({Key? key,required this.onFieldSubmitted,required this.controller}) : super(key: key);
+  final TextEditingController  controller;
+   late Function (dynamic) ? onFieldSubmitted;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var locale = AppLocalizations.of(context)!;
     return SafeArea(
       bottom: false,
       child: Container(
@@ -22,7 +26,14 @@ class HeaderWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
 
-                Expanded(child: CustomTextField(hint: 'Search', onTap: () {  }, title: '',isSearch: true,)),
+                Expanded(child: CustomTextField(
+                  controller: controller,
+                  hint: locale.search!,
+                  textInputAction: TextInputAction.done,
+                  onFieldSubmitted: onFieldSubmitted,
+                  onTap: () {  }, title: '',isSearch: true,)),
+
+
                 const SizedBox(width: 20,),
                 Container(
                     decoration: BoxDecoration(

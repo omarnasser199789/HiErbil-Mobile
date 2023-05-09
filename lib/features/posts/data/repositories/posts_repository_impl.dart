@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:hi_erbil_mobile/features/posts/domain/entities/post_entity.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/blog_categories_entity.dart';
 import '../../domain/repositories/posts_repository.dart';
@@ -27,6 +28,13 @@ class PostsRepositoryImpl implements PostsRepository{
       return postsRemoteDataSource.getBlogCategories();
     });
 
+  }
+
+  @override
+  Future<Either<Failure, PostEntity>> getPost(int id) async {
+    return await convertToPostEntity((){
+      return postsRemoteDataSource.getPost(id);
+    });
   }
 
 

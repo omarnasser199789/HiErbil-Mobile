@@ -7,6 +7,7 @@ import 'package:hi_erbil_mobile/core/widgets/app_bar_type3.dart';
 import 'package:hi_erbil_mobile/core/widgets/cached_net_work_image.dart';
 import 'package:hi_erbil_mobile/features/posts/presentation/bloc/posts_bloc.dart';
 import '../../../../core/globals.dart';
+import '../../../../core/widgets/waiting_widget.dart';
 import '../../../../global_style.dart';
 import '../../../../injection_container.dart';
 import '../widgets/posts_style.dart';
@@ -44,6 +45,9 @@ class _PostsPageState extends State<PostsPage> {
 
           if (state is Empty) {
             BlocProvider.of<PostsBloc>(context).add(GetBlogCategoriesEvent());/// => SuccessGetBlogCategories
+          }
+          if(state is Loading){
+            return const WaitingWidget();
           }
 
           if(state is SuccessGetBlogCategories){
@@ -97,27 +101,29 @@ class _PostsPageState extends State<PostsPage> {
                   ),
                   child: DefaultTabController(
                       length: tabs.length,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: TabBar(
-                              isScrollable: true,
-                              labelColor: Theme.of(context).canvasColor,
-                              unselectedLabelColor: iconsColor,
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              labelStyle:
-                              poppinsRegularTextStyle(fontSize: 12, context: context),
-                              tabs: tabs,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10, bottom: 10),
+                              child: TabBar(
+                                isScrollable: true,
+                                labelColor: Theme.of(context).canvasColor,
+                                unselectedLabelColor: iconsColor,
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                labelStyle:
+                                poppinsRegularTextStyle(fontSize: 12, context: context),
+                                tabs: tabs,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: size.height - 188,
-                            child: TabBarView(
-                              children: tabBarViewList,
+                            SizedBox(
+                              height: size.height - 188,
+                              child: TabBarView(
+                                children: tabBarViewList,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       )),
                 ),
               ),

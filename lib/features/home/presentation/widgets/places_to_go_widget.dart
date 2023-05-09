@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hi_erbil_mobile/core/globals.dart';
 
 import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/product_widget.dart';
+import '../../../../core/widgets/waiting_widget.dart';
 import '../../../../product_page.dart';
+import '../../../wishlist/domain/usecase/add_to_wishlist_usecase.dart';
 import '../../data/models/places_model.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
@@ -17,7 +20,7 @@ import '../../../../injection_container.dart';
 
 class PlacesToGoWidget extends StatelessWidget {
    PlacesToGoWidget({Key? key}) : super(key: key);
-   Datum mainItem = Datum(id: -1, lat: '', long: '', type: '',
+   Datum mainItem = Datum(id: -1, lat: 0.0, long: 0.0, type: '',
       createdAt: DateTime.now(), isMain: true, attachments: [], address: '', title: '', description: '');
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,10 @@ class PlacesToGoWidget extends StatelessWidget {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params:GetPlacesParams(type:"Place")));
           }
+          if(state is Loading){
+            return const WaitingWidget();
+          }
+
 
           if (state is SuccessGetPlaces) {
 
@@ -77,9 +84,16 @@ class PlacesToGoWidget extends StatelessWidget {
                           itemBuilder: (BuildContext ctx, index) {
 
                             return  ProductWidget(enableFav: false,onTap: (){
-                              goTo(context, (context) =>  ProductPage(title: state.placesEntity.data[index].title,));
+                              goTo(context, (context) =>  ProductPage(title: state.placesEntity.data[index].title,
+                                id: state.placesEntity.data[index].id,));
                             },
-                              title:state.placesEntity.data[index].title,);
+                              title:state.placesEntity.data[index].title,
+                              image: (state.placesEntity.data[index].attachments.isNotEmpty)?s3Amazonaws+ state.placesEntity.data[index].attachments[0].path:null,
+                              addProductToFavParams:AddProductToFavParams(
+                                  apiId: state.placesEntity.data[index].id,
+                                  title: state.placesEntity.data[index].title,
+                                  image:(state.placesEntity.data[index].attachments.isNotEmpty)?
+                                  s3Amazonaws+state.placesEntity.data[index].attachments[0].path:""),);
 
 
                           }),

@@ -27,6 +27,7 @@ class CustomTextField extends StatefulWidget {
   final Color ? titleColor;
   final FocusNode? focusNode;
   late  bool ? isPassword;
+
   late  TextAlign ? textAlign;
   late  TextInputType ? keyboardType;
   late Function () onTap;
@@ -155,10 +156,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 ),
               ),
 
-              onChanged: (value) {
-                // if(value.length==11)
-                //   FocusScope.of(context).unfocus();
-              },
+              // onChanged: ,
             ),
           ),
         ),

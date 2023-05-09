@@ -1,5 +1,6 @@
 
 import 'package:dartz/dartz.dart';
+import 'package:hi_erbil_mobile/features/home/domain/entities/place_entity.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
@@ -16,6 +17,7 @@ typedef Future<BannersEntity> BannersEntityInfoChooser();
 typedef Future<CategoriesEntity> CategoriesEntityInfoChooser();
 typedef Future<PlacesEntity> PlacesEntityInfoChooser();
 typedef Future<TagsEntity> TagsEntityInfoChooser();
+typedef Future<PlaceEntity> PlaceEntityInfoChooser();
 
 
 
@@ -55,6 +57,18 @@ Future<Either<Failure,PlacesEntity>> convertToPlacesEntity(
 
 Future<Either<Failure,TagsEntity>> convertToTagsEntity(
     TagsEntityInfoChooser vv,
+    ) async{
+  try {
+    final remotePhysician = await vv();
+    return Right(remotePhysician);
+  } on ServerException {
+    return Left(ServerFailure());
+  }
+}
+
+
+Future<Either<Failure,PlaceEntity>> convertToPlaceEntity(
+    PlaceEntityInfoChooser vv,
     ) async{
   try {
     final remotePhysician = await vv();

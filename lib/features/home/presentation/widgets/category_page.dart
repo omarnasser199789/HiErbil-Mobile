@@ -8,6 +8,7 @@ import 'package:hi_erbil_mobile/core/widgets/app_bar_type3.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
 import '../../../../core/widgets/cached_net_work_image.dart';
+import '../../../../core/widgets/waiting_widget.dart';
 import '../../../../global_style.dart';
 import '../../../../injection_container.dart';
 import '../bloc/home_bloc.dart';
@@ -46,6 +47,10 @@ class _CategoryPageState extends State<CategoryPage> {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetTagsEvent(catId: widget.id));/// => SuccessGetBlogCategories
           }
+          if(state is Loading){
+            return const WaitingWidget();
+          }
+
 
           if(state is SuccessGetTags){
             tabs = [];
@@ -73,58 +78,60 @@ class _CategoryPageState extends State<CategoryPage> {
                 ),
               );
 
-
-
-              tabBarViewList.add( GlobalStyle());
+              tabBarViewList.add( GlobalStyle(tagPlaces:item.tagPlaces,catId:widget.id ,));
 
 
 
 
 
             }
+            return Scaffold(
+              appBar: appBarWidgetType3(widget.title, context,true, [], null),
+              body: Padding(
+                padding: const EdgeInsets.only(top:10),
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).cardColor,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                  ),
+                  child: DefaultTabController(
+                      length: tabs.length,
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 10, bottom: 10),
+                              child: TabBar(
+                                isScrollable: true,
+                                labelColor: Theme.of(context).canvasColor,
+                                unselectedLabelColor: iconsColor,
+                                indicatorSize: TabBarIndicatorSize.tab,
+                                labelStyle:
+                                poppinsRegularTextStyle(fontSize: 12, context: context),
+                                tabs: tabs,
+                              ),
+                            ),
+                            SizedBox(
+                              height: size.height - 188,
+                              child: TabBarView(
+                                children: tabBarViewList,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
+              ),
+            );
           }
 
 
+          return Container();
 
 
-          return Scaffold(
-            appBar: appBarWidgetType3(widget.title, context,true, [], null),
-            body: Padding(
-              padding: const EdgeInsets.only(top:10),
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).cardColor,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                ),
-                child: DefaultTabController(
-                    length: tabs.length,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: TabBar(
-                            isScrollable: true,
-                            labelColor: Theme.of(context).canvasColor,
-                            unselectedLabelColor: iconsColor,
-                            indicatorSize: TabBarIndicatorSize.tab,
-                            labelStyle:
-                            poppinsRegularTextStyle(fontSize: 12, context: context),
-                            tabs: tabs,
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height - 188,
-                          child: TabBarView(
-                            children: tabBarViewList,
-                          ),
-                        ),
-                      ],
-                    )),
-              ),
-            ),
-          );
+
 
 
 

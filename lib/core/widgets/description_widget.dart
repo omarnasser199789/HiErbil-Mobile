@@ -9,8 +9,9 @@ class DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(top: 40),
+      padding: const EdgeInsets.only(top: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -19,9 +20,12 @@ class DescriptionWidget extends StatelessWidget {
             style: poppinsSemiBoldTextStyle(fontSize: 16, context: context),
           ),
           const SizedBox(height: 15),
-          Text(
-            description,
-            style: poppinsRegularTextStyle(fontSize: 14, context: context),
+          Container(
+            width:size.width-34 ,
+            child: Text(
+              description,
+              style: poppinsRegularTextStyle(fontSize: 14, context: context),
+            ),
           ),
         ],
       ),

@@ -2,6 +2,7 @@
 
 
 
+import 'package:hi_erbil_mobile/features/home/domain/entities/place_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/places_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
@@ -30,6 +31,11 @@ class SuccessGetPlaces extends HomeState {
 class SuccessGetTags extends HomeState {
   TagsEntity tagsEntity;
   SuccessGetTags({required this.tagsEntity});
+}
+
+class SuccessGetPlace extends HomeState {
+  PlaceEntity placeEntity;
+  SuccessGetPlace({required this.placeEntity});
 }
 
 

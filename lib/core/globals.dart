@@ -6,9 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'error/failures.dart';
 
+import 'package:sqflite/sqflite.dart';
 
-
-// String baseUrl="http://10.17.10.1:9595";
+// String baseUrl="http://192.168.224.127:3000";
 String baseUrl="https://hierbil.lucid-source.com";
 String s3Amazonaws="https://hierbil.s3.eu-north-1.amazonaws.com/";
 late SharedPreferences globalSH;
@@ -22,7 +22,8 @@ int lastPage = 0;
 int selectedCardIndex=0;
 int? selectedLanguage = -1;
 
-
+late Future<Database>   database ;
+late Database db;
 ////////////////////////////////////////////////////
 
 const String SERVER_FAILURE_MESSAGE = 'Server Failure';

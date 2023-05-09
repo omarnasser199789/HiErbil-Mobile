@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 import 'package:hi_erbil_mobile/core/widgets/custom_botton.dart';
+import 'package:hi_erbil_mobile/product_page.dart';
 
 import 'core/globals.dart';
+import 'core/widgets/app_bar_widget.dart';
 import 'core/widgets/cached_net_work_image.dart';
 import 'features/home/data/models/places_model.dart';
 
@@ -53,16 +55,21 @@ class HistoryWidget extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top:250),
-                    child: Text("The History of Erbil Citadel",style: poppinsSemiBoldTextStyle(fontSize: 32, context: context,color: Colors.white),),
+                    child: Text(mainItem.title,style: poppinsSemiBoldTextStyle(fontSize: 32, context: context,color: Colors.white),),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top:10),
-                    child: Text("Erbil Citadel is the oldest inhabited cities in the world with an age of over 5000 years",style: poppinsRegularTextStyle(fontSize: 14, context: context,color: Colors.white),),
+                    child: Text(mainItem.description,maxLines: 2,style: poppinsRegularTextStyle(fontSize: 14, context: context,color: Colors.white),),
                   ),
 
-                  const Padding(
+                   Padding(
                     padding: EdgeInsets.only(top:25),
-                    child: CustomButton(width: 120,title: "Read More",color: Colors.white,textColor: Colors.black,borderRadius: 50,),
+                    child: CustomButton(width: 120,title: "Read More",color: Colors.white,
+                      textColor: Colors.black,borderRadius: 50,
+                    onTap: (){
+                      goTo(context, (context) =>  ProductPage(title: mainItem.title,
+                        id: mainItem.id,));
+                    },),
                   ),
                 ],
               ),

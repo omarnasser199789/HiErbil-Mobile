@@ -4,14 +4,17 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/pages/home_page.dart';
 import 'package:hi_erbil_mobile/posts_page.dart';
-import 'package:hi_erbil_mobile/wishlist_page.dart';
+import 'package:hi_erbil_mobile/features/wishlist/presentation/pages/wishlist_page.dart';
 import 'Locale/locale.dart';
 import 'Theme/style.dart';
 import 'about_page.dart';
 import 'core/globals.dart';
 import 'core/widgets/double_back_to_close_widget.dart';
+import 'features/map/presentation/pages/maps_page.dart';
+import 'features/map/presentation/pages/mpa_page.dart';
 import 'features/posts/presentation/pages/posts_page.dart';
 
 
@@ -64,7 +67,7 @@ class _NavPageState extends State<NavPage> {
                 ),
                 if (page != 0)
                   Text(
-                    locale.main!,
+                    locale.home!,
                     maxLines: 1,
                     style: blackBoldTextStyle(context: context,fontSize: 10, color: Colors.grey),
                   ),
@@ -86,7 +89,7 @@ class _NavPageState extends State<NavPage> {
                 ),
                 if (page != 1)
                   Text(
-                    "Posts",
+                    locale.posts!,
                     maxLines: 1,
                     style: blackBoldTextStyle(context: context,fontSize: 10, color: Colors.grey),
                   ),
@@ -108,7 +111,7 @@ class _NavPageState extends State<NavPage> {
                 ),
                 if (page != 2)
                   Text(
-                    "Map",
+                    locale.map!,
                     maxLines: 1,
                     style: blackBoldTextStyle(context: context,fontSize: 10, color: Colors.grey),
                   ),
@@ -130,7 +133,7 @@ class _NavPageState extends State<NavPage> {
                 ),
                 if (page != 3)
                   Text(
-                    "Wishlist",
+                    locale.wishlist!,
                     maxLines: 1,
                     style: blackBoldTextStyle(context: context,fontSize: 10, color: Colors.grey),
                   ),
@@ -177,6 +180,7 @@ class _NavPageState extends State<NavPage> {
       ),
     );
   }
+  Set<Marker> markers = Set<Marker>();
 
   Widget buildColumn(int page) {
     switch (page) {
@@ -185,9 +189,19 @@ class _NavPageState extends State<NavPage> {
       case 1:
         return  PostsPage(title: 'Posts');
       case 2:
-        return   Container();
+
+        return    MapsPage();
+
+        // Marker(
+        //   markerId:  MarkerId(""),
+        //   infoWindow:  InfoWindow(
+        //     title:"i.place.title",
+        //   ),
+        //   position: LatLng(32,32),
+        //   // icon: BitmapDescriptor.fromBytes(markIcons),
+        // )
       case 3:
-        return const WishlistPage();
+        return  WishlistPage();
       case 4:
         return  AboutPage();
 

@@ -54,8 +54,8 @@ class Datum {
   });
 
   int id;
-  String lat;
-  String long;
+  double lat;
+  double long;
   bool isMain;
   String type;
   DateTime createdAt;

@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/categories_entity.dart';
+import 'package:hi_erbil_mobile/features/home/domain/entities/place_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/places_entity.dart';
 import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
@@ -50,9 +51,16 @@ class HomeRepositoryImpl implements HomeRepository{
   }
 
   @override
-  Future<Either<Failure, TagsEntity>> getTags(int catId) async{
+  Future<Either<Failure, TagsEntity>> getTags(int? catId) async{
     return await convertToTagsEntity((){
       return homeRemoteDataSource.getTags(catId);
+    });
+  }
+
+  @override
+  Future<Either<Failure, PlaceEntity>> getPlaceById(int id) async{
+    return await convertToPlaceEntity((){
+      return homeRemoteDataSource.getPlaceById(id);
     });
   }
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/foundation.dart';
+import 'package:hi_erbil_mobile/features/home/data/models/place_model.dart';
 import 'package:http/http.dart';
 
 import '../../../../../core/error/exceptions.dart';
@@ -131,6 +132,39 @@ class HomeRemoteDataFunctions {
       }
       if (response.statusCode == 200) {
         return tagsModelFromJson(response.body);
+      } else {
+        if (kDebugMode) {
+          print(response.statusCode);
+        }
+        throw ServerException();
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+
+      throw ServerException();
+    }
+  }
+  Future<PlaceModel> getPlaceById(String url,) async {
+    if (kDebugMode) {
+      print(url);
+    }
+
+    try {
+      final response = await get(
+        Uri.parse(url),
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+          "lang": "${globalSH.getString(CACHED_USER_LANGUAGE)}",
+        },
+      ).timeout(Duration(seconds: timeout));
+      if (kDebugMode) {
+        print("StatusCode ${response.statusCode}");
+      }
+      if (response.statusCode == 200) {
+        return placeModelFromJson(response.body);
       } else {
         if (kDebugMode) {
           print(response.statusCode);

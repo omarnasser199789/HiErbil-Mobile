@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../../core/functions.dart';
 import '../../../../core/globals.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
+import '../../../../core/widgets/waiting_widget.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
@@ -49,6 +50,10 @@ class _BannerWidgetState extends State<BannerWidget> {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetBannersEvent());
           }
+          if(state is Loading){
+            return const WaitingWidget();
+          }
+
 
           if( state is SuccessGetBanners){
             return Stack(
@@ -78,7 +83,7 @@ class _BannerWidgetState extends State<BannerWidget> {
                                 height: widget.height,
                                 child: CachedNetWorkImage(
                                   borderRadius: widget.borderRadius,
-                                  boxFit: BoxFit.cover,
+                                  boxFit: BoxFit.fill,
                                   url:  (e.attachments.isNotEmpty)? s3Amazonaws+e.attachments[0].path:null,
                                 ),
                               ),

@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:hi_erbil_mobile/features/posts/domain/entities/post_entity.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/globals.dart';
@@ -12,6 +13,15 @@ Stream<PostState> SuccessGetBlogCategoriesOrErrorState(
   yield failureOrSuccess.fold(
     (failure) => Error(message: mapFailureToMessage(failure)),
     (params) => SuccessGetBlogCategories(params:params),
+  );
+}
+
+Stream<PostState> SuccessGetPostOrErrorState(
+  Either<Failure, PostEntity> failureOrSuccess,
+) async* {
+  yield failureOrSuccess.fold(
+    (failure) => Error(message: mapFailureToMessage(failure)),
+    (params) => SuccessGetPost(params:params),
   );
 }
 

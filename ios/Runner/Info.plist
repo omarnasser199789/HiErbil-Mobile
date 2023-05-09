@@ -47,5 +47,37 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+	<key>NSCameraUsageDescription</key>
+        	<string>Texto solicitando autorização</string>
+        	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+        	<string>Kulshi needs Location access for &quot;some reason&quot;!</string>
+        	<key>NSLocationAlwaysUsageDescription</key>
+        	<string>Kulshi needs Location access for &quot;some reason&quot;!</string>
+        	<key>NSLocationWhenInUseUsageDescription</key>
+        	<string>Kulshi needs Location access for &quot;some reason&quot;!</string>
+        	<key>NSPhotoLibraryUsageDescription</key>
+        	<string>We need Photos access to allow you to update Profile Picture.</string>
+        	<key>Privacy - Camera Usage Description</key>
+        	<string>Kulshi requires access to your phone’s camera.</string>
+    	<key>CFBundleURLTypes</key>
+        	<array>
+        		<dict>
+        			<key>CFBundleIdentifier</key>
+        			<string></string>
+        			<key>CFBundleTypeRole</key>
+        			<string>Editor</string>
+        			<key>CFBundleURLSchemes</key>
+        			<array>
+        				<string>app-1-409381074901-ios-d3caf6f98a412eb5b8ef5c</string>
+        			</array>
+        		</dict>
+        	</array>
+    	<key>UIViewControllerBasedStatusBarAppearance</key>
+    	<false/>
+    	<key>UIApplicationSupportsIndirectInputEvents</key>
+    	<true/>
+
+
 </dict>
 </plist>

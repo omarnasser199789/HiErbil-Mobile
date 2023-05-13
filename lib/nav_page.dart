@@ -10,7 +10,7 @@ import 'package:hi_erbil_mobile/posts_page.dart';
 import 'package:hi_erbil_mobile/features/wishlist/presentation/pages/wishlist_page.dart';
 import 'Locale/locale.dart';
 import 'Theme/style.dart';
-import 'about_page.dart';
+import 'features/about/presentation/pages/about_page.dart';
 import 'core/globals.dart';
 import 'core/widgets/double_back_to_close_widget.dart';
 import 'features/map/presentation/pages/maps_page.dart';

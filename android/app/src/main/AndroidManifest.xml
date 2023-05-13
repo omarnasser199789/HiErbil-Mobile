@@ -4,6 +4,8 @@
         android:label="hi_erbil_mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCFbrd2y0TCw90qjsb_mEDwShWE8gPWbIw"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

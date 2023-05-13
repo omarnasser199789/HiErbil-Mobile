@@ -27,30 +27,10 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
   flutter:
     sdk: flutter
-  curved_navigation_bar: ^1.0.3
-  shared_preferences: ^2.0.8
-  url_launcher: ^6.1.5
-  advance_notification: ^1.0.6
-  get_it: ^7.2.0
-  intl: ^0.17.0
-  flutter_bloc: ^7.0.1
-  equatable: ^2.0.3
-  dartz: ^0.10.0
-  shimmer: ^2.0.0
-  sqflite: ^2.1.0+1
-  flutter_svg: ^2.0.0+1
-  auto_size_text: ^3.0.0
-  cached_network_image: ^3.2.2
-  carousel_slider: ^4.2.1
-  animation_wrappers: ^3.0.0
-  favorite_button: ^0.0.4
-  google_maps_flutter: ^2.2.0
-  flutter_localizations:
-    sdk: flutter
-  http: ^0.13.5
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -61,12 +41,27 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  curved_navigation_bar: ^1.0.3
+  shared_preferences: ^2.0.8
+  url_launcher: ^6.1.5
+  advance_notification: ^1.0.6
+  get_it: ^7.2.0
+  intl: ^0.18.0
+  flutter_bloc: ^7.0.1
+  equatable: ^2.0.3
+  dartz: ^0.10.0
+  shimmer: ^2.0.0
+  sqflite: ^2.2.8+2
+  flutter_svg: ^2.0.5
+  auto_size_text: ^3.0.0
+  cached_network_image: ^3.2.3
+  dropdown_button2: ^2.1.2
+  carousel_slider: ^4.2.1
+  animation_wrappers: ^3.0.0
+  favorite_button: ^0.0.4
+  google_maps_flutter: ^2.2.0
+  flutter_localization: ^0.1.10
+  http: ^0.13.6
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

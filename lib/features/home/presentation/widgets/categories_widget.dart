@@ -91,7 +91,7 @@ class CategoriesWidget extends StatelessWidget {
                       shrinkWrap: true,
                       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                           maxCrossAxisExtent: 140,
-                          childAspectRatio: 0.9,
+                          childAspectRatio: 0.8,
                           crossAxisSpacing: 0,
                           mainAxisSpacing: 0),
                       itemCount: gridViewList.length,

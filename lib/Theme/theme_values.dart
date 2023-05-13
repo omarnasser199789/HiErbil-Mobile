@@ -20,7 +20,7 @@ final ThemeData appTheme = ThemeData.dark().copyWith(
   disabledColor: const Color.fromRGBO(18, 18, 18, 1),
   canvasColor: const Color.fromRGBO(18, 18, 18, 1),
   cardColor:cardColorForLightTheme, //const Color.fromRGBO(255, 255, 255, 1),
-  accentColor: const Color.fromRGBO(121, 121, 121, 1),
+  // accentColor: const Color.fromRGBO(121, 121, 121, 1),
   // cursorColor:const Color.fromRGBO(251, 250, 251, 1),
   // textTheme: Theme.of(context).textTheme.apply(bodyColor: Colors.pink),
   textTheme:  Typography(platform: TargetPlatform.iOS).black,
@@ -40,7 +40,7 @@ final ThemeData darkTheme = ThemeData(
   // useMaterial3: true,
   disabledColor: const Color.fromRGBO(251, 250, 251, 1),
   canvasColor: Colors.white.withOpacity(0.87),
-  accentColor: const Color.fromRGBO(160, 160, 160, 1),
+  // accentColor: const Color.fromRGBO(160, 160, 160, 1),
   // cursorColor: const Color.fromRGBO(112, 112, 112, 0.5),
   cardColor: cardColorForDarkMode,//const Color.fromRGBO(45, 45, 45, 1),
   textTheme:  Typography(platform: TargetPlatform.iOS).white,
@@ -53,7 +53,7 @@ final ThemeData darkTheme = ThemeData(
 /// ----  BlueTheme  ----
 final blueTheme = ThemeData(
   primaryColor: bluePrimary,
-  accentColor: blueAccent,
+  // accentColor: blueAccent,
   backgroundColor: blueBackground,
   scaffoldBackgroundColor: blueBackground,
   disabledColor: const Color.fromRGBO(18, 18, 18, 1),
@@ -68,7 +68,7 @@ const spookyAccent = Color(0xFFBB86FC);
 const spookyBackground = Color(0xFF4A4A4A);
 final spookyTheme = ThemeData(
   primaryColor: spookyPrimary,
-  accentColor: spookyAccent,
+  // accentColor: spookyAccent,
   backgroundColor: spookyBackground,
   scaffoldBackgroundColor: spookyBackground,
   disabledColor: const Color.fromRGBO(18, 18, 18, 1),
@@ -83,7 +83,7 @@ const greenAccent = Color(0xFF631739);
 const greenBackground = Color(0xFFFFFFFF);
 final greenTheme = ThemeData(
   primaryColor: greenPrimary,
-  accentColor: greenAccent,
+  // accentColor: greenAccent,
   backgroundColor: greenBackground,
   scaffoldBackgroundColor: greenBackground,
   disabledColor: const Color.fromRGBO(18, 18, 18, 1),
@@ -98,7 +98,7 @@ const pinkAccent = Color(0xFF0C7D9C);
 const pinkBackground = Color(0xFFFFFFFF);
 final pinkTheme = ThemeData(
   primaryColor: pinkPrimary,
-  accentColor: pinkAccent,
+  // accentColor: pinkAccent,
   backgroundColor: pinkBackground,
   scaffoldBackgroundColor: pinkBackground,
   disabledColor: const Color.fromRGBO(18, 18, 18, 1),

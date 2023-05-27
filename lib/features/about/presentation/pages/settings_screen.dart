@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hi_erbil_mobile/Theme/style.dart';
 
 import '../../../../core/widgets/app_bar_type3.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -11,185 +12,226 @@ class SettingsScreen extends StatefulWidget {
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
 
-class _SettingsScreenState extends State<SettingsScreen> {
+class ExpansionPanelItem {
+  ExpansionPanelItem({
+    required this.headerText,
+    required this.body,
+    this.isExpanded = true,
+  });
+
+  String headerText;
+  Widget body;
+  bool isExpanded;
+}
+
+class _SettingsScreenState extends State<SettingsScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+  bool _isExpanded = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 100),
+    );
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+    // Delay execution of _toggleContainer by 1 second
+    Future.delayed(Duration(milliseconds: 100), () {
+      _toggleContainer();
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _toggleContainer() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+      if (_isExpanded) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+    });
+  }
+
+  List<ExpansionPanelItem> _items = [];
   @override
   Widget build(BuildContext context) {
-    final List<String> themeItems = ['Auto', 'Dark Mode', 'Light Mode'];
-    // String dropdownValue = list.first;
-    final List<String> languageItems = ['English', 'كوردي', 'عربي'];
-    String? selectedValue;
-
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: appBarWidgetType3("Settings", context, true, [], null),
-      body: Container(
-        width: double.infinity,
-        height: size.height,
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-        ),
-        child: Column(
-          children: [
-            SizedBox(height: size.height / 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton2(
-                  isExpanded: true,
-                  hint: Row(
-                    children: [
-                      SvgPicture.asset('assets/svg/language.svg'),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      const SizedBox(width: 5),
-                      const Expanded(
-                        child: Text(
-                          'Language',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                  items: languageItems
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ))
-                      .toList(),
-                  value: selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value as String;
-                    });
-                  },
-                  buttonStyleData: ButtonStyleData(
-                    height: 50,
-                    width: double.maxFinite,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Colors.white),
-                    elevation: 2,
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_forward_ios_outlined,
+    if (_items.isEmpty) {
+      _items.add(ExpansionPanelItem(
+          headerText: 'Language',
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: size.width - 34,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "English",
+                      style: poppinsRegularTextStyle(
+                          fontSize: 16, context: context),
                     ),
-                    iconSize: 14,
-                    iconEnabledColor: Colors.black,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight: 300,
-                    width: 320,
-                    padding: const EdgeInsets.symmetric(horizontal: 45),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    height: 40,
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: size.height / 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 64),
-              child: Divider(
-                color: Colors.black.withOpacity(.4),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: size.width - 34,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "English",
+                      style: poppinsRegularTextStyle(
+                          fontSize: 16, context: context),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: size.height / 30),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton2(
-                  isExpanded: true,
-                  hint: Row(
-                    children: [
-                      SvgPicture.asset('assets/svg/moon.svg'),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      const SizedBox(width: 5),
-                      const Expanded(
-                        child: Text(
-                          'Dark Mode',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: size.width - 34,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "English",
+                      style: poppinsRegularTextStyle(
+                          fontSize: 16, context: context),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )));
+
+      _items.add(ExpansionPanelItem(
+          headerText: 'Dark Mode',
+          body: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: size.width - 34,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Auto",
+                      style: poppinsRegularTextStyle(
+                          fontSize: 16, context: context),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: size.width - 34,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Dark Mode",
+                      style: poppinsRegularTextStyle(
+                          fontSize: 16, context: context),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8),
+                child: Container(
+                  width: size.width - 34,
+                  decoration: BoxDecoration(
+                      color: Theme.of(context).scaffoldBackgroundColor,
+                      borderRadius: BorderRadius.circular(6)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      "Light Mode",
+                      style: poppinsRegularTextStyle(
+                          fontSize: 16, context: context),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          )));
+    }
+
+    return Scaffold(
+      appBar: appBarWidgetType3("Settings", context, true, [], null),
+      body: Container(
+        height: size.height,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            AnimatedContainer(
+              duration: Duration(milliseconds: 200),
+              height: _isExpanded ? 0.0 : size.height - 100,
+              decoration: BoxDecoration(
+                color: Theme.of(context).cardColor,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20)),
+              ),
+              padding: EdgeInsets.all(16.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ExpansionPanelList(
+                      elevation: 0,
+                      expandedHeaderPadding: EdgeInsets.all(0),
+                      expansionCallback: (int index, bool isExpanded) {
+                        print("********");
+                        setState(() {
+                          _items[index].isExpanded = !isExpanded;
+                        });
+                      },
+                      children:
+                          _items.map<ExpansionPanel>((ExpansionPanelItem item) {
+                        return ExpansionPanel(
+                          canTapOnHeader: true,
+                          headerBuilder:
+                              (BuildContext context, bool isExpanded) {
+                            return ListTile(
+                              title: Text(item.headerText),
+                            );
+                          },
+                          body: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            child: item.body,
                           ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ],
-                  ),
-                  items: themeItems
-                      .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ))
-                      .toList(),
-                  value: selectedValue,
-                  onChanged: (value) {
-                    setState(() {
-                      selectedValue = value as String;
-                    });
-                  },
-                  buttonStyleData: ButtonStyleData(
-                    height: 50,
-                    width: double.maxFinite,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(14),
-                        color: Colors.white),
-                    elevation: 2,
-                  ),
-                  iconStyleData: const IconStyleData(
-                    icon: Icon(
-                      Icons.arrow_forward_ios_outlined,
+                          isExpanded: item.isExpanded,
+                        );
+                      }).toList(),
                     ),
-                    iconSize: 14,
-                    iconEnabledColor: Colors.black,
-                  ),
-                  dropdownStyleData: DropdownStyleData(
-                    maxHeight: 300,
-                    width: 320,
-                    padding: const EdgeInsets.symmetric(horizontal: 45),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                  ),
-                  menuItemStyleData: const MenuItemStyleData(
-                    height: 40,
-                  ),
+                  ],
                 ),
               ),
             ),

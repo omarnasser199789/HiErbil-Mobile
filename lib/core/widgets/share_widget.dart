@@ -14,7 +14,7 @@ class ShareWidget extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: SvgPicture.asset("assets/svg/share.svg",color: Theme.of(context).canvasColor,),
+          child: SvgPicture.asset("assets/svg/share.svg",color: Theme.of(context).canvasColor,),
       ),
     );
   }

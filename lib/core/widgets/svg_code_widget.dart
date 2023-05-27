@@ -25,7 +25,14 @@ class _SvgCodeWidgetState extends State<SvgCodeWidget> {
     }
 
 
-    svgCode=  code.replaceAll("ec5252",primaryColorTypeString);
+    print("££££££££££");
+    print(primaryColorTypeString);
+    print("££££££££££");
+
+      svgCode=  code.replaceAll("ec5252",primaryColorTypeString);
+
+
+
     if (!mounted) {
       return;
     }

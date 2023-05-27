@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/pages/categories_page.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/widgets/waiting_categories_widget.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
@@ -36,7 +38,6 @@ class CategoriesWidget extends StatelessWidget {
           }
 
           if (state is Empty) {
-
             BlocProvider.of<HomeBloc>(context).add(GetCategoriesEvent());
           }
           if(state is SuccessGetCategories ){
@@ -57,7 +58,6 @@ class CategoriesWidget extends StatelessWidget {
 
 
             }else{
-
               for(var item in state.categoriesEntity.data){
                 gridViewList.add(
                     CategoriesListItem(
@@ -80,7 +80,8 @@ class CategoriesWidget extends StatelessWidget {
 
 
 
-            widgetList.add(Text(locale.categories!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
+            widgetList.add(
+                Text(locale.categories!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
 
             widgetList.add(
                 Padding(
@@ -102,21 +103,22 @@ class CategoriesWidget extends StatelessWidget {
                 )
             );
 
+            return Padding(
+              padding: const EdgeInsets.only(top:26,left: 17,right: 17),
+              child: SizedBox(
+                width: double.infinity,
 
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: widgetList,
+                ),
+              ),
+            );
           }
 
-          return Padding(
-            padding: const EdgeInsets.only(top:26,left: 17,right: 17),
-            child: SizedBox(
-              width: double.infinity,
+          return  WaitingCategoryWidget();
 
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: widgetList,
-              ),
-            ),
-          );
         }));
 
 

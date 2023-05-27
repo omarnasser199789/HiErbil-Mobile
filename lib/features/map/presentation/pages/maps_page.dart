@@ -26,13 +26,49 @@ class MapsPage extends StatefulWidget {
   State<MapsPage> createState() => _MapsPageState();
 }
 
-class _MapsPageState extends State<MapsPage> {
+class _MapsPageState extends State<MapsPage>  with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _animation;
+  bool _isExpanded = true;
+
   bool selected = true;
 
   List<Widget> tabs = [];
 
   List<Widget> tabBarViewList = [];
   Set<Marker> markers = Set<Marker>();
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 100),
+    );
+    _animation =
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut);
+    // Delay execution of _toggleContainer by 1 second
+    Future.delayed(Duration(milliseconds: 100), () {
+      _toggleContainer();
+    });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _toggleContainer() {
+    setState(() {
+      _isExpanded = !_isExpanded;
+      if (_isExpanded) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +84,9 @@ class _MapsPageState extends State<MapsPage> {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetMapItemsEvent());/// => SuccessGetBlogCategories
           }
-          if(state is Loading){
-            return const WaitingWidget();
-          }
+          // if(state is Loading){
+          //   return const WaitingWidget();
+          // }
 
 
           if(state is SuccessGetMapItems){
@@ -108,49 +144,63 @@ class _MapsPageState extends State<MapsPage> {
 
             }
 
-            return Scaffold(
-              appBar: appBarWidgetType3("Map", context, false, [], null),
-              body: Padding(
-                padding: const EdgeInsets.only(top:10),
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20), topRight: Radius.circular(20)),
-                  ),
-                  child: DefaultTabController(
-                      length: tabs.length,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10, bottom: 10),
-                            child: TabBar(
-                              isScrollable: true,
-                              labelColor: Theme.of(context).canvasColor,
-                              unselectedLabelColor: iconsColor,
-                              indicatorSize: TabBarIndicatorSize.tab,
-                              labelStyle:
-                              poppinsRegularTextStyle(fontSize: 12, context: context),
-                              tabs: tabs,
-                            ),
-                          ),
-                          SizedBox(
-                            height: size.height - 208,
-                            child: TabBarView(
-                              physics:NeverScrollableScrollPhysics(),
-                              children: tabBarViewList,
-                            ),
-                          ),
-                        ],
-                      )),
-                ),
-              ),
-            );
+
           }
 
 
-          return Container();
+          return Scaffold(
+            appBar: appBarWidgetType3("Map", context, false, [], null),
+            body:
+            Container(
+              height: size.height,
+              child: Stack (
+                alignment: Alignment.bottomCenter,
+                children: [
+
+                  AnimatedContainer(
+                    duration: Duration(milliseconds: 200),
+                    height: _isExpanded ? 0.0 : size.height - 100,
+                    width: double.infinity,
+
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+                    ),
+                    child: SingleChildScrollView(
+                      child: DefaultTabController(
+                          length: tabs.length,
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(top: 10, bottom: 10),
+                                child: TabBar(
+                                  isScrollable: true,
+                                  labelColor: Theme.of(context).canvasColor,
+                                  unselectedLabelColor: iconsColor,
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  labelStyle:
+                                  poppinsRegularTextStyle(fontSize: 12, context: context),
+                                  tabs: tabs,
+                                ),
+                              ),
+                              SizedBox(
+                                height: size.height - 208,
+                                child: TabBarView(
+                                  physics:NeverScrollableScrollPhysics(),
+                                  children: tabBarViewList,
+                                ),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ),
+                  if(state is Loading)
+                    WaitingWidget(),
+                ],
+              ),
+            ),
+          );
 
 
 

@@ -12,6 +12,7 @@ import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
 import '../../../../injection_container.dart';
+import 'package:shimmer/shimmer.dart';
 
 class BannerWidget extends StatefulWidget {
   const BannerWidget(
@@ -56,9 +57,9 @@ class _BannerWidgetState extends State<BannerWidget> {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetBannersEvent());
           }
-          if (state is Loading) {
-            return const WaitingWidget();
-          }
+          // if (state is Loading) {
+          //   return const WaitingWidget();
+          // }
 
           if (state is SuccessGetBanners) {
             return Stack(
@@ -150,7 +151,16 @@ class _BannerWidgetState extends State<BannerWidget> {
             );
           }
 
-          return Container();
+          return  Shimmer.fromColors(
+              baseColor:Theme.of(context).cardColor,
+              highlightColor:  const Color.fromRGBO(119, 118, 118, 0.5490196078431373),
+
+              child: Container(
+                color: Theme.of(context).cardColor,
+                height: widget.height,
+                width: double.infinity,
+
+              ));
         },
       ),
     );

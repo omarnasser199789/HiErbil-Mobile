@@ -53,87 +53,90 @@ class _HomePageState extends State<HomePage> {
           return Scaffold(
             body: SingleChildScrollView(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:  [
-
-
-
-
-
+                children: [
                   HeaderWidget(
                     controller: controller,
                     onFieldSubmitted: (value) {
                       BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params: GetPlacesParams(text: "")));
                     },),
+                  Container(
+                    height: size.height-85,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children:  [
+                         if(controller.text=="")
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
 
-                 if(controller.text=="")
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-
-                        Padding(
-                          padding:  EdgeInsets.only(top:18),
-                          child: BannerWidget(padding:  EdgeInsets.only(left: 17,right: 17),height: size.height*0.35,borderRadius: BorderRadius.circular(10),),
-                        ),
-
-
-                        CategoriesWidget(),
-                        SightsWidget(),
-                        PlacesToGoWidget(),
-                        const SizedBox(height: 100,),
-                      ],
-                    ),
+                                Padding(
+                                  padding:  EdgeInsets.only(top:18),
+                                  child: BannerWidget(padding:  EdgeInsets.only(left: 17,right: 17),height: size.height*0.35,borderRadius: BorderRadius.circular(10),),
+                                ),
 
 
-
-                  if(controller.text!=""&& state is SuccessGetPlaces)
-                    GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(
-                            left: 17, right: 17, top: 31),
-                        shrinkWrap: true,
-                        gridDelegate:
-                        SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: 210, //210
-                          childAspectRatio:
-                          (orientation == Orientation.landscape)
-                              ? 0.83
-                              : 0.9,
-                          crossAxisSpacing: 17,
-                          mainAxisSpacing: 17,
-                        ),
-                        itemCount: state.placesEntity.data.length,
-                        itemBuilder: (BuildContext ctx, index) {
-                          return ProductWidget(
-                            enableFav: true,
-                            addProductToFavParams:
-                            AddProductToFavParams(
-                                apiId:  state.placesEntity.data[index].id,
-                                title:  state.placesEntity.data[index].title,
-                                image:  ( state.placesEntity.data[index].attachments.isNotEmpty)? s3Amazonaws+  state.placesEntity.data[index].attachments[0].path:""
+                                CategoriesWidget(),
+                                SightsWidget(),
+                                PlacesToGoWidget(),
+                                const SizedBox(height: 100,),
+                              ],
                             ),
-                            title: state.placesEntity.data[index].title,
-                            image: ( state.placesEntity.data[index].attachments.isNotEmpty)? s3Amazonaws+  state.placesEntity.data[index].attachments[0].path:null,
-                            onTap: () async{
-                              var v =  await   goTo(
-                                  context,
-                                      (context) =>  ProductPage(
-                                    title:  state.placesEntity.data[index].title,
-                                    id:  state.placesEntity.data[index].id,
-                                  ));
-
-                              // BlocProvider.of<HomeBloc>(context).add(GetTagsEvent(catId: catId));/// => SuccessGetBlogCategories
-
-                            },
-                          );
-                        }),
-
-                  if(controller.text!=""&& state is Loading)
-                    Center(child: WaitingWidget()),
 
 
 
+                          if(controller.text!=""&& state is SuccessGetPlaces)
+                            GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                padding: const EdgeInsets.only(
+                                    left: 17, right: 17, top: 31),
+                                shrinkWrap: true,
+                                gridDelegate:
+                                SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent: 210, //210
+                                  childAspectRatio:
+                                  (orientation == Orientation.landscape)
+                                      ? 0.83
+                                      : 0.9,
+                                  crossAxisSpacing: 17,
+                                  mainAxisSpacing: 17,
+                                ),
+                                itemCount: state.placesEntity.data.length,
+                                itemBuilder: (BuildContext ctx, index) {
+                                  return ProductWidget(
+                                    enableFav: true,
+                                    addProductToFavParams:
+                                    AddProductToFavParams(
+                                        apiId:  state.placesEntity.data[index].id,
+                                        title:  state.placesEntity.data[index].title,
+                                        image:  ( state.placesEntity.data[index].attachments.isNotEmpty)? s3Amazonaws+  state.placesEntity.data[index].attachments[0].path:""
+                                    ),
+                                    title: state.placesEntity.data[index].title,
+                                    image: ( state.placesEntity.data[index].attachments.isNotEmpty)? s3Amazonaws+  state.placesEntity.data[index].attachments[0].path:null,
+                                    onTap: () async{
+                                      var v =  await   goTo(
+                                          context,
+                                              (context) =>  ProductPage(
+                                            title:  state.placesEntity.data[index].title,
+                                            id:  state.placesEntity.data[index].id,
+                                          ));
 
+                                      // BlocProvider.of<HomeBloc>(context).add(GetTagsEvent(catId: catId));/// => SuccessGetBlogCategories
+
+                                    },
+                                  );
+                                }),
+
+                          if(controller.text!=""&& state is Loading)
+                            Center(child: WaitingWidget()),
+
+
+
+
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

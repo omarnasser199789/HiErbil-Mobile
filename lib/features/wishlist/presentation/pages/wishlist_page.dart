@@ -9,9 +9,9 @@ import '../../../../core/widgets/app_bar_type3.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/fav_widget.dart';
 import '../../../../core/widgets/product_widget.dart';
-import '../../../../global_style.dart';
+import '../../../home/presentation/widgets/global_style.dart';
 import '../../../../injection_container.dart';
-import '../../../../product_page.dart';
+import '../../../../core/pages/product_page.dart';
 import '../../domain/entities/wishlist_entity.dart';
 import '../../domain/usecase/add_to_wishlist_usecase.dart';
 import 'bloc/wishlist_bloc.dart';
@@ -78,7 +78,7 @@ class WishlistPage extends StatelessWidget {
                               ProductWidget(
                                 enableFav: true,
                                 title:wishlistEntity[index].title,
-                                image:  (wishlistEntity[index].image!="")?s3Amazonaws+ wishlistEntity[index].image:null,
+                                image:  (wishlistEntity[index].image!="")?wishlistEntity[index].image:null,
                                 onTap: () {
                                   goTo(
                                       context,

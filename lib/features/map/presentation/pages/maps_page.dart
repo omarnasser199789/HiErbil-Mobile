@@ -10,7 +10,7 @@ import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/waiting_widget.dart';
-import '../../../../global_style.dart';
+import '../../../home/presentation/widgets/global_style.dart';
 import '../../../../injection_container.dart';
 import 'mpa_page.dart';
 
@@ -46,16 +46,16 @@ class _MapsPageState extends State<MapsPage> {
           }
 
           if (state is Empty) {
-            BlocProvider.of<HomeBloc>(context).add(GetTagsEvent(catId: null));/// => SuccessGetBlogCategories
+            BlocProvider.of<HomeBloc>(context).add(GetMapItemsEvent());/// => SuccessGetBlogCategories
           }
           if(state is Loading){
             return const WaitingWidget();
           }
 
 
-          if(state is SuccessGetTags){
+          if(state is SuccessGetMapItems){
             tabs = [];
-            for (var item in state.tagsEntity.data) {
+            for (var item in state.mapItemsEntity.data) {
               tabs.add(
                 Tab(
                   height: 80,
@@ -80,15 +80,23 @@ class _MapsPageState extends State<MapsPage> {
               );
               markers = Set<Marker>();
 
-              for(var i in item.tagPlaces){
-                markers.add(Marker(
-                  markerId:  MarkerId("${i.place.id}"),
-                  infoWindow:  InfoWindow(
-                    title:i.place.title,
-                  ),
-                  position: LatLng(i.place.long,i.place.lat),
-                  // icon: BitmapDescriptor.fromBytes(markIcons),
-                ));
+              print("--------ITEM ${item.title}-------");
+
+              for(var i in item.tags){
+
+                for(var j in i.tagPlaces){
+                  print("Title: "+j.place.title+" Lat: "+j.place.lat.toString()+" Long: "+j.place.long.toString());
+                  markers.add(Marker(
+                    markerId:  MarkerId("${j.place.id}"),
+                    infoWindow:  InfoWindow(
+                      title:j.place.title,
+                    ),
+                    position: LatLng(j.place.lat,j.place.long),
+                    // icon: BitmapDescriptor.fromBytes(markIcons),
+                  ));
+                }
+
+
               }
 
 

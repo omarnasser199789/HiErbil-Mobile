@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 
-import 'Locale/locale.dart';
-import 'core/widgets/custom_text_field.dart';
+import '../../../../Locale/locale.dart';
+import '../../../../core/widgets/custom_text_field.dart';
 
 class HeaderWidget extends StatelessWidget {
    HeaderWidget({Key? key,required this.onFieldSubmitted,required this.controller}) : super(key: key);

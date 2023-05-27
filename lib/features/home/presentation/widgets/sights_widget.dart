@@ -8,9 +8,9 @@ import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/waiting_widget.dart';
-import '../../../../history_widget.dart';
+import 'history_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../product_page.dart';
+import '../../../../core/pages/product_page.dart';
 import '../../data/models/places_model.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
@@ -39,7 +39,7 @@ class SightsWidget extends StatelessWidget {
           }
 
           if (state is Empty) {
-            BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params: GetPlacesParams(type: "Sight")));
+              BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params: GetPlacesParams(type: "Sight")));
           }
           if(state is Loading){
             return const WaitingWidget();

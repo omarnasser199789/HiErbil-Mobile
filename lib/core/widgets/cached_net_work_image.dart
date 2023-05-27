@@ -34,6 +34,8 @@ class _CachedNetWorkImageState extends State<CachedNetWorkImage> {
   @override
   Widget build(BuildContext context) {
 
+    print("******");
+    print(widget.url);
     return ClipRRect(
       borderRadius:widget.borderRadius,
       child: Padding(

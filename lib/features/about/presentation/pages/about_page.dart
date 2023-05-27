@@ -8,7 +8,7 @@ import 'package:hi_erbil_mobile/features/about/presentation/pages/settings_scree
 import '../../../../core/widgets/app_bar_type3.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/product_widget.dart';
-import '../../../../global_style.dart';
+import '../../../home/presentation/widgets/global_style.dart';
 
 class ItemList {
   ItemList({required this.svg, required this.text});

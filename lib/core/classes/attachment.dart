@@ -1,4 +1,4 @@
-class Attachment {
+  class Attachment {
   Attachment({
     required this.id,
     required this.objectId,

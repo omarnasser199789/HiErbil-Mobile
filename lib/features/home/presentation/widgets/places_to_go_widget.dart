@@ -8,19 +8,21 @@ import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/product_widget.dart';
 import '../../../../core/widgets/waiting_widget.dart';
-import '../../../../product_page.dart';
+import '../../../../core/pages/product_page.dart';
 import '../../../wishlist/domain/usecase/add_to_wishlist_usecase.dart';
 import '../../data/models/places_model.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
-import '../../../../history_widget.dart';
+import 'history_widget.dart';
 import '../../../../injection_container.dart';
 
 class PlacesToGoWidget extends StatelessWidget {
    PlacesToGoWidget({Key? key}) : super(key: key);
-   Datum mainItem = Datum(id: -1, lat: 0.0, long: 0.0, type: '',
+   Datum mainItem = Datum(id: -1,
+        lat: 0.0, long: 0.0,
+       type: '',
       createdAt: DateTime.now(), isMain: true, attachments: [], address: '', title: '', description: '');
   @override
   Widget build(BuildContext context) {
@@ -76,7 +78,7 @@ class PlacesToGoWidget extends StatelessWidget {
                           shrinkWrap: true,
                           gridDelegate:   SliverGridDelegateWithMaxCrossAxisExtent(
                             maxCrossAxisExtent: 210,//210
-                            childAspectRatio:(orientation==Orientation.landscape)?0.83:0.9,
+                            childAspectRatio:(orientation==Orientation.landscape)?0.83:0.89,
                             crossAxisSpacing: 17,//
                             mainAxisSpacing: 17,
                           ),

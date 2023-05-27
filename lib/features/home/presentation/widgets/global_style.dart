@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hi_erbil_mobile/product_page.dart';
+import 'package:hi_erbil_mobile/core/pages/product_page.dart';
 
-import 'core/globals.dart';
-import 'core/widgets/app_bar_widget.dart';
-import 'core/widgets/product_widget.dart';
-import 'features/home/data/models/tags_model.dart';
-import 'features/home/presentation/bloc/bloc.dart';
-import 'features/wishlist/domain/usecase/add_to_wishlist_usecase.dart';
+import '../../../../core/globals.dart';
+import '../../../../core/widgets/app_bar_widget.dart';
+import '../../../../core/widgets/product_widget.dart';
+import '../../data/models/tags_model.dart';
+import '../bloc/bloc.dart';
+import '../../../wishlist/domain/usecase/add_to_wishlist_usecase.dart';
 
 class GlobalStyle extends StatelessWidget {
   const GlobalStyle({Key? key, required this.tagPlaces,required this.catId}) : super(key: key);

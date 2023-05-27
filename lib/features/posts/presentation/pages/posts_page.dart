@@ -8,7 +8,7 @@ import 'package:hi_erbil_mobile/core/widgets/cached_net_work_image.dart';
 import 'package:hi_erbil_mobile/features/posts/presentation/bloc/posts_bloc.dart';
 import '../../../../core/globals.dart';
 import '../../../../core/widgets/waiting_widget.dart';
-import '../../../../global_style.dart';
+import '../../../home/presentation/widgets/global_style.dart';
 import '../../../../injection_container.dart';
 import '../widgets/posts_style.dart';
 import '../bloc/posts_event.dart';

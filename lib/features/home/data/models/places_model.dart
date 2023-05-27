@@ -66,8 +66,8 @@ class Datum {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
-    lat: json["lat"],
-    long: json["long"],
+    lat: json["lat"].toDouble(),
+    long: json["long"].toDouble(),
     isMain: json["isMain"],
     type: json["type"],
     createdAt: DateTime.parse(json["createdAt"]),

@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hi_erbil_mobile/categories_page.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/pages/categories_page.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
 
@@ -156,7 +156,7 @@ class CategoriesListItem extends StatelessWidget {
           if(type2==null)
           Padding(
             padding: const EdgeInsets.only(top:5),
-            child: Text(title!,style: poppinsMediumTextStyle(fontSize: 12,context: context),),
+            child: Text(title!,style: poppinsMediumTextStyle(fontSize: 12,context: context,),maxLines: 1,),
           )
         ],
       ),

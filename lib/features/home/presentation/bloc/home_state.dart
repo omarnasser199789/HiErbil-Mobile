@@ -8,6 +8,7 @@ import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
 import '../../domain/entities/banners_entity.dart';
 import '../../domain/entities/categories_entity.dart';
+import '../../domain/entities/map_items_entity.dart';
 
 abstract class HomeState {}
 
@@ -36,6 +37,11 @@ class SuccessGetTags extends HomeState {
 class SuccessGetPlace extends HomeState {
   PlaceEntity placeEntity;
   SuccessGetPlace({required this.placeEntity});
+}
+
+class SuccessGetMapItems extends HomeState {
+  MapItemsEntity mapItemsEntity;
+  SuccessGetMapItems({required this.mapItemsEntity});
 }
 
 

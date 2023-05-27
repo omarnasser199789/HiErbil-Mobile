@@ -3,6 +3,7 @@ import 'package:hi_erbil_mobile/features/home/presentation/bloc/success_error/ei
 
 import '../../domain/usecase/get_banners_usecase.dart';
 import '../../domain/usecase/get_categories_usecase.dart';
+import '../../domain/usecase/get_map_item_usecase.dart';
 import '../../domain/usecase/get_place_by_id_usecase.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../../domain/usecase/get_tags_usecase.dart';
@@ -14,6 +15,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final GetPlacesUseCase getPlacesUseCase;
   final GetTagsUseCase getTagsUseCase;
   final GetPlaceByIdUseCase getPlaceByIdUseCase;
+  final GetMapItemsUseCase getMapItemsUseCase;
 
 
 
@@ -24,6 +26,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required GetPlacesUseCase concreteGetPlacesUseCase,
     required GetTagsUseCase concreteGetTagsUseCase,
     required GetPlaceByIdUseCase concreteGetPlaceByIdUseCase,
+    required GetMapItemsUseCase concreteGetMapItemsUseCase,
 
 
 
@@ -36,6 +39,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         getPlacesUseCase = concreteGetPlacesUseCase,
         getTagsUseCase = concreteGetTagsUseCase,
         getPlaceByIdUseCase = concreteGetPlaceByIdUseCase,
+        getMapItemsUseCase = concreteGetMapItemsUseCase,
 
 
 
@@ -68,6 +72,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield Loading();
       final failureOrPhysician = await getPlaceByIdUseCase(event.id);
       yield* SuccessGetPlaceOrErrorState(failureOrPhysician);
+    }
+    if(event is GetMapItemsEvent){
+      yield Loading();
+      final failureOrPhysician = await getMapItemsUseCase(0);
+      yield* SuccessGetMapItemsOrErrorState(failureOrPhysician);
     }
 
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 import 'package:hi_erbil_mobile/core/widgets/custom_botton.dart';
-import 'package:hi_erbil_mobile/product_page.dart';
+import 'package:hi_erbil_mobile/core/pages/product_page.dart';
 
-import 'core/globals.dart';
-import 'core/widgets/app_bar_widget.dart';
-import 'core/widgets/cached_net_work_image.dart';
-import 'features/home/data/models/places_model.dart';
+import '../../../../core/globals.dart';
+import '../../../../core/widgets/app_bar_widget.dart';
+import '../../../../core/widgets/cached_net_work_image.dart';
+import '../../data/models/places_model.dart';
 
 class HistoryWidget extends StatelessWidget {
 

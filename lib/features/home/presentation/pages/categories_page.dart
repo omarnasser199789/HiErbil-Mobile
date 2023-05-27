@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
-import 'Theme/style.dart';
-import 'core/widgets/app_bar_widget.dart';
-import 'core/widgets/cached_net_work_image.dart';
-import 'features/home/domain/entities/categories_entity.dart';
-import 'features/home/presentation/widgets/category_page.dart';
-import 'features/home/presentation/widgets/category_section.dart';
-import 'core/widgets/app_bar_type3.dart';
+import '../../../../Theme/style.dart';
+import '../../../../core/widgets/app_bar_widget.dart';
+import '../../../../core/widgets/cached_net_work_image.dart';
+import '../../domain/entities/categories_entity.dart';
+import '../widgets/category_page.dart';
+import '../widgets/category_section.dart';
+import '../../../../core/widgets/app_bar_type3.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({Key? key, required this.categoriesEntity}) : super(key: key);

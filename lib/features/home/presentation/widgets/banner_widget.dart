@@ -35,14 +35,20 @@ class Items {
 }
 
 class _BannerWidgetState extends State<BannerWidget> {
-  int selectedIndex = -1;
+  ValueNotifier<int> selectedIndexNotifier = ValueNotifier<int>(-1);
+
+  @override
+  void dispose() {
+    selectedIndexNotifier.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<Items> list = [Items(image: '', id: 1), Items(image: '', id: 2)];
-
     return BlocProvider(
-        create: (BuildContext context) => sl<HomeBloc>(),
-        child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+      create: (BuildContext context) => sl<HomeBloc>(),
+      child: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
           if (kDebugMode) {
             print("State IS $state");
           }
@@ -50,12 +56,11 @@ class _BannerWidgetState extends State<BannerWidget> {
           if (state is Empty) {
             BlocProvider.of<HomeBloc>(context).add(GetBannersEvent());
           }
-          if(state is Loading){
+          if (state is Loading) {
             return const WaitingWidget();
           }
 
-
-          if( state is SuccessGetBanners){
+          if (state is SuccessGetBanners) {
             return Stack(
               alignment: Alignment.topCenter,
               children: [
@@ -63,7 +68,8 @@ class _BannerWidgetState extends State<BannerWidget> {
                   height: widget.height,
                   width: double.infinity,
                   child: CarouselSlider(
-                    items: state.bannersEntity.data.map(
+                    items: state.bannersEntity.data
+                        .map(
                           (e) => Column(
                         children: [
                           Padding(
@@ -73,18 +79,23 @@ class _BannerWidgetState extends State<BannerWidget> {
                                 // if (await canLaunch(e.linkUrl)) {
                                 //   await launch(e.linkUrl);
                                 // } else {
-                                //   showMessage(message: "حدث خطا اثناء تنفيذ العملية", context: context);
+                                //   showMessage(
+                                //     message: "حدث خطا اثناء تنفيذ العملية",
+                                //     context: context,
+                                //   );
                                 // }
-                                // setState(() {
-                                //
-                                // });
+
+                                // Update selectedIndexNotifier value
+                                selectedIndexNotifier.value = e.id;
                               },
                               child: SizedBox(
                                 height: widget.height,
                                 child: CachedNetWorkImage(
                                   borderRadius: widget.borderRadius,
                                   boxFit: BoxFit.fill,
-                                  url:  (e.attachments.isNotEmpty)? s3Amazonaws+e.attachments[0].path:null,
+                                  url: (e.attachments.isNotEmpty)
+                                      ? s3Amazonaws + e.attachments[0].path
+                                      : null,
                                 ),
                               ),
                             ),
@@ -99,9 +110,9 @@ class _BannerWidgetState extends State<BannerWidget> {
                       enableInfiniteScroll: false,
                       viewportFraction: 1,
                       onPageChanged: (index, reason) {
-                        setState(() {
-                          selectedIndex = list[index].id;
-                        });
+                        // Update selectedIndexNotifier value
+                        selectedIndexNotifier.value =
+                            state.bannersEntity.data[index].id;
                       },
                     ),
                   ),
@@ -110,34 +121,38 @@ class _BannerWidgetState extends State<BannerWidget> {
                   bottom: 20,
                   left: 0,
                   right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: state.bannersEntity.data
-                        .map(
-                          (e) => AnimatedContainer(
-                        margin: const EdgeInsets.symmetric(horizontal: 2),
-                        duration: const Duration(milliseconds: 200),
-                        width: 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                            color: selectedIndex == e.id
-                                ? Theme.of(context).primaryColor
-                                : Theme.of(context)
-                                .primaryColor
-                                .withOpacity(0.5),
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                    )
-                        .toList(),
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: selectedIndexNotifier,
+                    builder: (BuildContext context, int selectedIndex, Widget? child) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: state.bannersEntity.data
+                            .map(
+                              (e) => AnimatedContainer(
+                            margin: const EdgeInsets.symmetric(horizontal: 2),
+                            duration: const Duration(milliseconds: 200),
+                            width: 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: selectedIndex == e.id
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context).primaryColor.withOpacity(0.5),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        )
+                            .toList(),
+                      );
+                    },
                   ),
                 ),
               ],
             );
           }
 
-
           return Container();
-
-        }));
+        },
+      ),
+    );
   }
 }

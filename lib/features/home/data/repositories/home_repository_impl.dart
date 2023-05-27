@@ -7,6 +7,7 @@ import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/banners_entity.dart';
+import '../../domain/entities/map_items_entity.dart';
 import '../../domain/repositories/home_repository.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../data_source/remot_data_sourse/home_remot_data_source.dart';
@@ -61,6 +62,13 @@ class HomeRepositoryImpl implements HomeRepository{
   Future<Either<Failure, PlaceEntity>> getPlaceById(int id) async{
     return await convertToPlaceEntity((){
       return homeRemoteDataSource.getPlaceById(id);
+    });
+  }
+
+  @override
+  Future<Either<Failure, MapItemsEntity>> getMapItems() async {
+    return await convertToMapItemsEntity((){
+      return homeRemoteDataSource.getMapItems();
     });
   }
 

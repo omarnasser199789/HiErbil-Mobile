@@ -57,9 +57,9 @@ class LaunchPage extends StatelessWidget {
                       title: 'Hi Erbil',
                       debugShowCheckedModeBanner: false,
                       themeMode: currentMode,
+
                       theme: themeNotifier_.getTheme(),
                       darkTheme: darkTheme,
-
                       localizationsDelegates: const [
                         AppLocalizationsDelegate(),
                         flutter_localizations.GlobalMaterialLocalizations.delegate,

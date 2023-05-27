@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/pages/home_page.dart';
-import 'package:hi_erbil_mobile/posts_page.dart';
 import 'package:hi_erbil_mobile/features/wishlist/presentation/pages/wishlist_page.dart';
 import 'Locale/locale.dart';
 import 'Theme/style.dart';
@@ -192,14 +191,6 @@ class _NavPageState extends State<NavPage> {
 
         return    MapsPage();
 
-        // Marker(
-        //   markerId:  MarkerId(""),
-        //   infoWindow:  InfoWindow(
-        //     title:"i.place.title",
-        //   ),
-        //   position: LatLng(32,32),
-        //   // icon: BitmapDescriptor.fromBytes(markIcons),
-        // )
       case 3:
         return  WishlistPage();
       case 4:

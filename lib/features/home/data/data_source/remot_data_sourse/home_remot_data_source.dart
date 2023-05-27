@@ -7,6 +7,7 @@ import '../../../../../core/globals.dart';
 import '../../../domain/entities/banners_entity.dart';
 import '../../../domain/usecase/get_places_usecase.dart';
 import '../../models/categories_model.dart';
+import '../../models/map_items_model.dart';
 import '../../models/places_model.dart';
 import '../../models/tags_model.dart';
 import 'home_remote_data_functions.dart';
@@ -19,6 +20,7 @@ abstract class HomeRemoteDataSource {
   Future<PlacesModel> getPlaces(GetPlacesParams params);
   Future<TagsModel> getTags(int? catId);
   Future<PlaceModel> getPlaceById(int id);
+  Future<MapItemsModel> getMapItems();
 
 
 
@@ -72,6 +74,11 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<PlaceModel> getPlaceById(int id) {
     return functions.getPlaceById('$baseUrl/place/$id');
+  }
+
+  @override
+  Future<MapItemsModel> getMapItems() {
+    return functions.getMapItems('$baseUrl/getCategoriesForMap?pageSize=10&page=0');
   }
 
 

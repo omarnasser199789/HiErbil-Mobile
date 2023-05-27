@@ -7,20 +7,20 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
-import 'core/globals.dart';
-import 'core/widgets/waiting_widget.dart';
-import 'features/home/presentation/bloc/home_bloc.dart';
-import 'features/home/presentation/bloc/home_state.dart';
-import 'features/home/presentation/widgets/banner_widget.dart';
-import 'core/widgets/app_bar_type3.dart';
-import 'core/widgets/cached_net_work_image.dart';
-import 'core/widgets/description_widget.dart';
-import 'core/widgets/fav_widget.dart';
-import 'core/widgets/share_widget.dart';
-import 'core/widgets/taq_widget.dart';
-import 'features/wishlist/domain/usecase/add_to_wishlist_usecase.dart';
-import 'injection_container.dart';
-import 'location_on_map_widget.dart';
+import '../globals.dart';
+import '../widgets/waiting_widget.dart';
+import '../../features/home/presentation/bloc/home_bloc.dart';
+import '../../features/home/presentation/bloc/home_state.dart';
+import '../../features/home/presentation/widgets/banner_widget.dart';
+import '../widgets/app_bar_type3.dart';
+import '../widgets/cached_net_work_image.dart';
+import '../widgets/description_widget.dart';
+import '../widgets/fav_widget.dart';
+import '../widgets/share_widget.dart';
+import '../widgets/taq_widget.dart';
+import '../../features/wishlist/domain/usecase/add_to_wishlist_usecase.dart';
+import '../../injection_container.dart';
+import '../widgets/location_on_map_widget.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key,required this.title,required this.id}) : super(key: key);

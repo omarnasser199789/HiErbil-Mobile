@@ -9,6 +9,7 @@ import 'features/home/data/repositories/home_repository_impl.dart';
 import 'features/home/domain/repositories/home_repository.dart';
 import 'features/home/domain/usecase/get_banners_usecase.dart';
 import 'features/home/domain/usecase/get_categories_usecase.dart';
+import 'features/home/domain/usecase/get_map_item_usecase.dart';
 import 'features/home/domain/usecase/get_place_by_id_usecase.dart';
 import 'features/home/domain/usecase/get_places_usecase.dart';
 import 'features/home/domain/usecase/get_tags_usecase.dart';
@@ -41,6 +42,7 @@ Future<void> init() async {
       concreteGetPlacesUseCase: sl(),
       concreteGetTagsUseCase:  sl(),
       concreteGetPlaceByIdUseCase: sl(),
+      concreteGetMapItemsUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -72,6 +74,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetCategoriesUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetBlogCategoriesUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetPostByIdUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetMapItemsUseCase(repository: sl()));
 
 
   ///Repository

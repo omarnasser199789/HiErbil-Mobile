@@ -6,6 +6,7 @@ import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failures.dart';
 import '../../domain/entities/banners_entity.dart';
 import '../../domain/entities/categories_entity.dart';
+import '../../domain/entities/map_items_entity.dart';
 import '../../domain/entities/places_entity.dart';
 import '../../domain/entities/tags_entity.dart';
 
@@ -18,6 +19,7 @@ typedef Future<CategoriesEntity> CategoriesEntityInfoChooser();
 typedef Future<PlacesEntity> PlacesEntityInfoChooser();
 typedef Future<TagsEntity> TagsEntityInfoChooser();
 typedef Future<PlaceEntity> PlaceEntityInfoChooser();
+typedef Future<MapItemsEntity> MapItemsEntityInfoChooser();
 
 
 
@@ -69,6 +71,16 @@ Future<Either<Failure,TagsEntity>> convertToTagsEntity(
 
 Future<Either<Failure,PlaceEntity>> convertToPlaceEntity(
     PlaceEntityInfoChooser vv,
+    ) async{
+  try {
+    final remotePhysician = await vv();
+    return Right(remotePhysician);
+  } on ServerException {
+    return Left(ServerFailure());
+  }
+}
+Future<Either<Failure,MapItemsEntity>> convertToMapItemsEntity(
+    MapItemsEntityInfoChooser vv,
     ) async{
   try {
     final remotePhysician = await vv();

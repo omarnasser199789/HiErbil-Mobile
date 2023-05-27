@@ -11,7 +11,7 @@ import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/product_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../product_page.dart';
+import '../../../../core/pages/product_page.dart';
 import '../../../wishlist/domain/usecase/add_to_wishlist_usecase.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
@@ -19,8 +19,8 @@ import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
 import '../widgets/banner_widget.dart';
 import '../widgets/categories_widget.dart';
-import '../../../../header_widget.dart';
-import '../../../../history_widget.dart';
+import '../widgets/header_widget.dart';
+import '../widgets/history_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -70,10 +70,13 @@ class _HomePageState extends State<HomePage> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+
                         Padding(
-                          padding:  EdgeInsets.only(top:26),
+                          padding:  EdgeInsets.only(top:18),
                           child: BannerWidget(padding:  EdgeInsets.only(left: 17,right: 17),height: size.height*0.35,borderRadius: BorderRadius.circular(10),),
                         ),
+
+
                         CategoriesWidget(),
                         SightsWidget(),
                         PlacesToGoWidget(),

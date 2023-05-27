@@ -10,10 +10,7 @@ class MapPage extends StatefulWidget {
   State<MapPage> createState() => _MapPageState();
 }
 class _MapPageState extends State<MapPage> {
-  final CameraPosition _kGooglePlex = const CameraPosition(
-    target: LatLng(36.20274909099813, 44.00113213522896),
-    zoom: 1.4746,
-  );
+
   String? _mapStyle;
   GoogleMapController? myMapController;
 
@@ -42,7 +39,10 @@ class _MapPageState extends State<MapPage> {
       markers: widget.markers,
       zoomControlsEnabled: false,
       onMapCreated: onMapCreated,
-      initialCameraPosition: _kGooglePlex,
+      initialCameraPosition: CameraPosition(
+        target: widget.markers.isNotEmpty ? widget.markers.first.position : LatLng(36.1996558,  43.990226),
+        zoom: 11.4746,
+      ),
     );
   }
 }

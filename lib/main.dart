@@ -31,7 +31,7 @@ class LaunchPage extends StatelessWidget {
 
 
     final themeNotifier_ = Provider.of<ThemeNotifier>(context);
-    String lan = "";
+    // String lan = "";
 
     if( globalSH.getString("ThemeMode")==""){
       LaunchPage.themeNotifier.value = ThemeMode.system;
@@ -40,6 +40,17 @@ class LaunchPage extends StatelessWidget {
       LaunchPage.themeNotifier.value = ThemeMode.dark;
     }else if(globalSH.getString("ThemeMode")=="light"){
       LaunchPage.themeNotifier.value = ThemeMode.light;
+    }
+
+    if (globalSH.getString(CACHED_USER_LANGUAGE) == 'ar') {
+      lang = 'ar';
+    }
+    else if (globalSH.getString(CACHED_USER_LANGUAGE) == 'kr') {
+      lang = 'fa';
+    }
+    else {
+      lang = 'en';
+
     }
 
     return BlocProvider<LanguageCubit>(
@@ -63,21 +74,24 @@ class LaunchPage extends StatelessWidget {
                       localizationsDelegates: const [
                         AppLocalizationsDelegate(),
                         flutter_localizations.GlobalMaterialLocalizations.delegate,
+                        flutter_localizations.GlobalWidgetsLocalizations.delegate,
+                        flutter_localizations.GlobalCupertinoLocalizations.delegate,
                       ],
                       localeListResolutionCallback: (locales, supportedLocales) {
                         if (globalSH.getString(CACHED_USER_LANGUAGE) == null ||
                             globalSH.getString(CACHED_USER_LANGUAGE) == "") {
-                          lan = supportedLocales.toString()[1] + supportedLocales.toString()[2];
-                          globalSH.setString(CACHED_USER_LANGUAGE, lan);
-                        } else {
+                          lang = supportedLocales.toString()[1] + supportedLocales.toString()[2];
+                          globalSH.setString(CACHED_USER_LANGUAGE, lang);
+                        }
+                        else {
                           if (globalSH.getString(CACHED_USER_LANGUAGE) == 'ar') {
-                            lan = 'ar';
+                            lang = 'ar';
                           }
                           else if (globalSH.getString(CACHED_USER_LANGUAGE) == 'kr') {
-                            lan = 'fa';
+                            lang = 'fa';
                           }
                           else {
-                            lan = 'en';
+                            lang = 'en';
 
                           }
                         }
@@ -96,7 +110,7 @@ class LaunchPage extends StatelessWidget {
                         Locale('fa'),
                       ],
                       locale: locale,
-                      home:  const NavPage(),
+                      home: const NavPage(),
                       // home: MapPage(markers:Set<Marker>() ),
 
                     );

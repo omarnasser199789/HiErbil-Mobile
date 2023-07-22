@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
+import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
@@ -16,8 +17,9 @@ class CategoriesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size =MediaQuery.of(context).size;
     final orientation = MediaQuery.of(context).orientation;
+    var locale = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: appBarWidgetType3("Categories",context,true,[],null),
+      appBar: appBarWidgetType3(locale.categories!,context,true,[],null),
       body: Padding(
         padding: const EdgeInsets.only(top:10),
         child: Container(

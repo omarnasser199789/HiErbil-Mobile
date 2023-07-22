@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../core/widgets/app_bar_type3.dart';
 
 class AboutHiErbilScreen extends StatelessWidget {
@@ -10,8 +11,9 @@ class AboutHiErbilScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var locale = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: appBarWidgetType3("About Hi Erbil", context, true, [], null),
+      appBar: appBarWidgetType3(locale.aboutHiErbil!, context, true, [], null),
       body: Container(
         width: double.infinity,
         height: size.height,

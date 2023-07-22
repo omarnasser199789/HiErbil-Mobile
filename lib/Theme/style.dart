@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../core/globals.dart';
 
-
 // Color searchIconColor=const Color.fromRGBO(200, 200, 200, 0.5);
 Color hintTextColor= const   Color.fromRGBO(121, 121, 121, 1);
 Color iconsColor= const   Color.fromRGBO(121, 121, 121, 1);// Color.fromRGBO(154, 154, 161, 1);
@@ -24,29 +23,27 @@ TextStyle whiteBoldTextStyle (double fontSize){
   return TextStyle(
       color: Colors.white,
       fontSize: fontSize,
-      fontFamily:
-      "taleeq-bold");
+      fontFamily: (lang=="en")?"RabarBold":"RabarBold",
+  );
 }
 
 TextStyle blackBoldTextStyle ({required double fontSize,required BuildContext context,Color ? color,double ? height}){
   return TextStyle(
-
       color:(color!=null)?color: Theme.of(context).canvasColor,//Colors.black,
       fontSize: fontSize,
       height: (height!=null)?height:0,
-
-      fontFamily:
-      "taleeq-bold");
+      fontFamily: (lang=="en")?"PoppinsSemiBold":"RabarBold",
+  );
 }
 
 TextStyle poppinsMediumTextStyle ({required double fontSize,required BuildContext context,Color ? color,double ? height,TextDecoration? decoration}){
   return TextStyle(
-
       color:(color!=null)?color: Theme.of(context).canvasColor,//Colors.black,
-      fontSize: fontSize,
+      fontSize:(lang=="en")? fontSize:fontSize-2,
       height: (height!=null)?height:0,
       decoration: decoration,
-      fontFamily: "PoppinsMedium");
+      fontFamily: (lang=="en")?"PoppinsMedium":"RabarBold",
+  );
 }
 
 TextStyle poppinsSemiBoldTextStyle ({required double fontSize,required BuildContext context,Color ? color,double ? height}){
@@ -55,26 +52,19 @@ TextStyle poppinsSemiBoldTextStyle ({required double fontSize,required BuildCont
       color:(color!=null)?color: Theme.of(context).canvasColor,//Colors.black,
       fontSize: fontSize,
       height: (height!=null)?height:0,
-      fontFamily: "PoppinsSemiBold");
+      fontFamily:(lang=="en")?"PoppinsSemiBold":"RabarBold",
+
+
+  );
 }
 
 TextStyle poppinsRegularTextStyle ({required double fontSize,required BuildContext context,Color ? color,double ? height}){
   return TextStyle(
-
       color:(color!=null)?color: Theme.of(context).canvasColor,//Colors.black,
       fontSize: fontSize,
       height: (height!=null)?height:0,
+      fontFamily:(lang=="en")?"PoppinsRegular":"RabarRegular",
 
-      fontFamily: "PoppinsRegular");
+  );
 }
 
-
-TextStyle blackRegularTextStyle ( {required double fontSize,double ? height,}){
-  return TextStyle(
-    color: iconsColor,
-      fontSize: fontSize,
-      height: (height!=null)?height:0,
-      fontFamily:
-      "taleeq-regular");
-
-}

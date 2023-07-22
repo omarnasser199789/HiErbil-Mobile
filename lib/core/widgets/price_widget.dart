@@ -49,8 +49,8 @@ class PriceWidget extends StatelessWidget {
                 padding:
                 const EdgeInsets.only(top: 0),
                 child: Text("\$${price.toInt()}",
-                    style: blackRegularTextStyle(
-                        fontSize: 18)),
+                    style: poppinsRegularTextStyle(
+                        fontSize: 18, context: context)),
               ),
               Padding(
                 padding:

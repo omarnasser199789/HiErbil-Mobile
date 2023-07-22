@@ -96,7 +96,7 @@ class _SettingsScreenState extends State<SettingsScreen>
     _items=[];
     // if (_items.isEmpty) {
       _items.add(ExpansionPanelItem(
-          headerText: 'Language',
+          headerText: localee.language!,
           body: Column(
             children: [
               LangItems(onTap: () {
@@ -108,17 +108,17 @@ class _SettingsScreenState extends State<SettingsScreen>
                   );
                   _languageCubit.selectArabicLanguage();
                 });
-              }, val: val, title: 'Arabic', radioValue: 2,),
+              }, val: val, title: localee.arabicc!, radioValue: 2,),
               LangItems(onTap: () {
                 setState(() {
                   val =3 ;
                   globalSH.setString(
                     CACHED_USER_LANGUAGE,
-                    'fa',
+                    'ku',
                   );
                   _languageCubit.selectKurdishgLanguage();
                 });
-              }, val: val, title: 'Kurdish', radioValue: 3,),
+              }, val: val, title: localee.kurdishh!, radioValue: 3,),
               LangItems(onTap: () {
                 setState(() {
                   val =4 ;
@@ -128,13 +128,13 @@ class _SettingsScreenState extends State<SettingsScreen>
                   );
                   _languageCubit.selectEngLanguage();
                 });
-              }, val: val, title: 'English', radioValue: 4,),
+              }, val: val, title: localee.englishh!, radioValue: 4,),
 
             ],
           )));
 
       _items.add(ExpansionPanelItem(
-          headerText: 'Dark Mode',
+          headerText: localee.darkMode!,
           body: Column(
             children: [
               Padding(
@@ -147,7 +147,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      "Auto",
+                      localee.auto!,
                       style: poppinsRegularTextStyle(
                           fontSize: 16, context: context),
                     ),
@@ -164,7 +164,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      "Dark Mode",
+                      localee.darkMode!,
                       style: poppinsRegularTextStyle(
                           fontSize: 16, context: context),
                     ),
@@ -181,7 +181,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                   child: Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(
-                      "Light Mode",
+                      localee.lightMode!,
                       style: poppinsRegularTextStyle(
                           fontSize: 16, context: context),
                     ),
@@ -190,10 +190,10 @@ class _SettingsScreenState extends State<SettingsScreen>
               ),
             ],
           )));
-    // }
 
+    var locale = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: appBarWidgetType3("Settings", context, true, [], null),
+      appBar: appBarWidgetType3(locale.settings!, context, true, [], null),
       body: Container(
         height: size.height,
         child: Stack(

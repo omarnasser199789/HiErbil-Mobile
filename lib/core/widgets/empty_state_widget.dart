@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:flutter/services.dart';
-import 'package:hi_erbil_mobile/core/widgets/svg_code_widget.dart';
 import '../../Theme/style.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -26,30 +24,17 @@ class EmptyStateWidget extends StatefulWidget {
 }
 
 class _EmptyStateWidgetState extends State<EmptyStateWidget> {
-  // String svgCode="";
-  // @override
-  // Future<void> didChangeDependencies() async {
-  //  String  code = await rootBundle.loadString(widget.svg);
-  //   svgCode=  code.replaceAll("ec5252",primaryColorTypeString);
-  //   setState(() {
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
-
     return FadedSlideAnimation(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(widget.svg,),
-              // SvgCodeWidget(svg: widget.svg,)
-
             ],
           ),
           Padding(
@@ -70,8 +55,6 @@ class _EmptyStateWidgetState extends State<EmptyStateWidget> {
             ),
           ),
           const  SizedBox(height: 130,),
-
-
         ],
       ),
       beginOffset: const Offset(0, 1),

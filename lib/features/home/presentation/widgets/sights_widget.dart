@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
@@ -28,16 +29,13 @@ class SightsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
+    var locale = AppLocalizations.of(context)!;
     return BlocProvider(
         create: (BuildContext context) => sl<HomeBloc>(),
         child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
           if (kDebugMode) {
             print("Categories State IS $state");
           }
-
           if (state is Empty) {
               BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params: GetPlacesParams(type: "Sight")));
           }
@@ -66,7 +64,7 @@ class SightsWidget extends StatelessWidget {
 
             }
 
-            widgetList.add(Text("Sights",style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
+            widgetList.add(Text(locale.sights!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
             widgetList.add(Padding(
               padding: const EdgeInsets.only(top:16),
               child: SingleChildScrollView(

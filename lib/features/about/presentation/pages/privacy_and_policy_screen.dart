@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_type3.dart';
 
@@ -9,8 +10,9 @@ class PrivacyAndPolicyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var locale = AppLocalizations.of(context)!;
     return Scaffold(
-      appBar: appBarWidgetType3("Privacy And Policy", context, true, [], null),
+      appBar: appBarWidgetType3(locale.privacyAndPolicy!, context, true, [], null),
       body: Container(
         width: double.infinity,
         height: size.height,

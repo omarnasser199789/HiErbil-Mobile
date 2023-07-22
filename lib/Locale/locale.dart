@@ -56,6 +56,55 @@ class AppLocalizations {
     return _localizedValues[locale.languageCode]!['search'];
   }
 
+  String? get more {
+    return _localizedValues[locale.languageCode]!['more'];
+  }
+  String? get placesToGo {
+    return _localizedValues[locale.languageCode]!['placesToGo'];
+  }
+  String? get sights {
+    return _localizedValues[locale.languageCode]!['sights'];
+  }
+  String? get aboutHiErbil {
+    return _localizedValues[locale.languageCode]!['aboutHiErbil'];
+  }
+  String? get privacyAndPolicy {
+    return _localizedValues[locale.languageCode]!['privacyAndPolicy'];
+  }
+  String? get settings {
+    return _localizedValues[locale.languageCode]!['settings'];
+  }
+  String? get sorryThereIsNoPlace {
+    return _localizedValues[locale.languageCode]!['sorryThereIsNoPlace'];
+  }
+  String? get youDoNotHaveAny {
+    return _localizedValues[locale.languageCode]!['youDoNotHaveAny'];
+  }
+  String? get version {
+    return _localizedValues[locale.languageCode]!['version'];
+  }
+  String? get lightMode {
+    return _localizedValues[locale.languageCode]!['lightMode'];
+  }
+  String? get darkMode {
+    return _localizedValues[locale.languageCode]!['darkMode'];
+  }
+  String? get auto {
+    return _localizedValues[locale.languageCode]!['auto'];
+  }
+  String? get englishh {
+    return _localizedValues[locale.languageCode]!['english'];
+  }
+  String? get kurdishh {
+    return _localizedValues[locale.languageCode]!['kurdish'];
+  }
+  String? get language {
+    return _localizedValues[locale.languageCode]!['language'];
+  }
+  String? get arabicc {
+    return _localizedValues[locale.languageCode]!['arabic'];
+  }
+
 
 
 

@@ -17,6 +17,7 @@ class HomeRemoteDataFunctions {
       print(url);
     }
 
+
     try {
       final response = await get(
         Uri.parse(url),

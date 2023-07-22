@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'Locale/language_cubit.dart';
 import 'Locale/locale.dart';
 import 'Theme/theme_notifier.dart';
 import 'Theme/theme_values.dart';
 import 'core/globals.dart';
 import 'package:provider/provider.dart';
-import 'features/home/presentation/pages/home_page.dart';
-import 'features/map/presentation/pages/mpa_page.dart';
 import 'injection_container.dart';
 import 'package:flutter_localizations/flutter_localizations.dart'  as flutter_localizations;
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'nav_page.dart';
 
 Future<void> main() async {
@@ -24,15 +19,11 @@ Future<void> main() async {
 
 class LaunchPage extends StatelessWidget {
   const LaunchPage({super.key});
-
   static final ValueNotifier<ThemeMode> themeNotifier =  ValueNotifier(ThemeMode.system);
   @override
   Widget build(BuildContext context) {
-
-
     final themeNotifier_ = Provider.of<ThemeNotifier>(context);
     // String lan = "";
-
     if( globalSH.getString("ThemeMode")==""){
       LaunchPage.themeNotifier.value = ThemeMode.system;
     }else if(globalSH.getString("ThemeMode")=="dark"){
@@ -45,12 +36,11 @@ class LaunchPage extends StatelessWidget {
     if (globalSH.getString(CACHED_USER_LANGUAGE) == 'ar') {
       lang = 'ar';
     }
-    else if (globalSH.getString(CACHED_USER_LANGUAGE) == 'kr') {
+    else if (globalSH.getString(CACHED_USER_LANGUAGE) == 'ku') {
       lang = 'fa';
     }
     else {
       lang = 'en';
-
     }
 
     return BlocProvider<LanguageCubit>(
@@ -62,13 +52,10 @@ class LaunchPage extends StatelessWidget {
                   valueListenable: themeNotifier,
                   builder: (_, ThemeMode currentMode, __) {
 
-
-
                     return MaterialApp(
                       title: 'Hi Erbil',
                       debugShowCheckedModeBanner: false,
                       themeMode: currentMode,
-
                       theme: themeNotifier_.getTheme(),
                       darkTheme: darkTheme,
                       localizationsDelegates: const [
@@ -87,15 +74,13 @@ class LaunchPage extends StatelessWidget {
                           if (globalSH.getString(CACHED_USER_LANGUAGE) == 'ar') {
                             lang = 'ar';
                           }
-                          else if (globalSH.getString(CACHED_USER_LANGUAGE) == 'kr') {
+                          else if (globalSH.getString(CACHED_USER_LANGUAGE) == 'ku') {
                             lang = 'fa';
                           }
                           else {
                             lang = 'en';
-
                           }
                         }
-
                       },
                       supportedLocales: const [
                         Locale('en'),
@@ -111,14 +96,8 @@ class LaunchPage extends StatelessWidget {
                       ],
                       locale: locale,
                       home: const NavPage(),
-                      // home: MapPage(markers:Set<Marker>() ),
-
                     );
-
-
                   })
-
-
       ),
     );
   }

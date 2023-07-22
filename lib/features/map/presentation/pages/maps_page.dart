@@ -9,6 +9,7 @@ import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_type3.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/waiting_widget.dart';
 import '../../../home/presentation/widgets/global_style.dart';
@@ -132,37 +133,23 @@ class _MapsPageState extends State<MapsPage>  with SingleTickerProviderStateMixi
                     // icon: BitmapDescriptor.fromBytes(markIcons),
                   ));
                 }
-
-
               }
-
-
               tabBarViewList.add( MapPage(markers: markers,));
-
-
-
-
-
             }
-
-
           }
-
-
+          var locale = AppLocalizations.of(context)!;
           return Scaffold(
-            appBar: appBarWidgetType3("Map", context, false, [], null),
+            appBar: appBarWidgetType3(locale.map!, context, false, [], null),
             body:
             Container(
               height: size.height,
               child: Stack (
                 alignment: Alignment.bottomCenter,
                 children: [
-
                   AnimatedContainer(
                     duration: Duration(milliseconds: 200),
                     height: _isExpanded ? 0.0 : size.height - 100,
                     width: double.infinity,
-
                     decoration: BoxDecoration(
                       color: Theme.of(context).cardColor,
                       borderRadius: const BorderRadius.only(

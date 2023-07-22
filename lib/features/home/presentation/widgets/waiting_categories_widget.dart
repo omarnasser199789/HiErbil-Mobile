@@ -13,7 +13,6 @@ class WaitingCategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
-
     for(int i=0; i<5; i++){
       gridViewList.add(
           Shimmer.fromColors(
@@ -25,11 +24,7 @@ class WaitingCategoryWidget extends StatelessWidget {
               onTap: (){}),
           ));
     }
-
-
-
-    widgetList.add(
-        Text(locale.categories!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
+    widgetList.add(Text(locale.categories!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
 
     widgetList.add(
         Padding(

@@ -109,8 +109,8 @@ class Place {
 
   factory Place.fromJson(Map<String, dynamic> json) => Place(
     id: json["id"]??-1,
-    lat: json["lat"]??"",
-    long: json["long"]??"",
+    lat: json["lat"]/1??0.0,
+    long: json["long"]/1??0.0,
     isMain: json["isMain"]??false,
     type: json["type"]??"",
     title: json["title"]??"",

@@ -155,7 +155,7 @@ class _NavPageState extends State<NavPage> {
                 ),
                 if (page != 4)
                   Text(
-                    "About",
+                    locale.about!,
                     maxLines: 1,
                     style: blackBoldTextStyle(context: context,fontSize: 10, color: Colors.grey),
                   ),
@@ -165,7 +165,6 @@ class _NavPageState extends State<NavPage> {
           color: Theme.of(context).cardColor,
           backgroundColor: const Color.fromRGBO(236, 82, 82, 0),
              buttonBackgroundColor:Theme.of(context).primaryColor,
-
           animationDuration: const Duration(milliseconds: 600),
           onTap: (index) {
             setState(() {
@@ -175,18 +174,18 @@ class _NavPageState extends State<NavPage> {
           },
           letIndexChange: (index) => true,
         ),
-        body: buildColumn(page),
+        body: buildColumn(page, locale),
       ),
     );
   }
   Set<Marker> markers = Set<Marker>();
 
-  Widget buildColumn(int page) {
+  Widget buildColumn(int page, locale) {
     switch (page) {
       case 0:
         return const HomePage();
       case 1:
-        return  PostsPage(title: 'Posts');
+        return  PostsPage(title: locale.posts!);
       case 2:
 
         return    MapsPage();

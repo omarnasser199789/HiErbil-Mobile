@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/Theme/style.dart';
 import 'package:hi_erbil_mobile/core/widgets/empty_state_widget.dart';
+import '../../../../Locale/locale.dart';
 import '../../../../core/functions.dart';
 import '../../../../core/globals.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
@@ -62,13 +63,13 @@ class PostsStyle extends StatelessWidget {
     }
 
     childrenList.add(const SizedBox(height: 100,));
-
+    var locale = AppLocalizations.of(context)!;
     return    SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(left: 17,right: 17),
         child: (posts.isNotEmpty)?Column(
           children: childrenList
-        ):EmptyStateWidget(svg: 'assets/svg/EmptyStatePhotoEditor.svg', text1: 'Sorry There is no place with this tag!',),
+        ):EmptyStateWidget(svg: 'assets/svg/EmptyStatePhotoEditor.svg', text1: locale.sorryThereIsNoPlace!,),
       ),
     );
   }

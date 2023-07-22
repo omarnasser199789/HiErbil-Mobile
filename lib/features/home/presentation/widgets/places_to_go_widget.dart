@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_erbil_mobile/core/globals.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
@@ -26,11 +27,8 @@ class PlacesToGoWidget extends StatelessWidget {
       createdAt: DateTime.now(), isMain: true, attachments: [], address: '', title: '', description: '');
   @override
   Widget build(BuildContext context) {
-
-    Size size = MediaQuery.of(context).size;
+    var locale = AppLocalizations.of(context)!;
     final orientation = MediaQuery.of(context).orientation;
-
-
     return BlocProvider(
         create: (BuildContext context) => sl<HomeBloc>(),
         child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
@@ -70,7 +68,7 @@ class PlacesToGoWidget extends StatelessWidget {
 
                       Padding(
                         padding: const EdgeInsets.only(top:28,bottom: 15),
-                        child: Text("Places to go",style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),),
+                        child: Text(locale.placesToGo!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),),
                       ),
                       GridView.builder(
                           physics: const NeverScrollableScrollPhysics(),

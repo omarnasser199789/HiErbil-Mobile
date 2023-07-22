@@ -5,6 +5,7 @@ import 'package:hi_erbil_mobile/features/about/presentation/pages/about_hi_erbil
 import 'package:hi_erbil_mobile/features/about/presentation/pages/privacy_and_policy_screen.dart';
 import 'package:hi_erbil_mobile/features/about/presentation/pages/settings_screen.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../core/widgets/app_bar_type3.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/product_widget.dart';
@@ -28,11 +29,7 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
   late Animation<double> _animation;
   bool _isExpanded = true;
 
-  List<ItemList> itemList = [
-    ItemList(svg: "assets/svg/about.svg", text: "About Hi Erbil"),
-    ItemList(svg: "assets/svg/setting.svg", text: "Settings"),
-    ItemList(svg: "assets/svg/privacy.svg", text: "Privacy and Policy"),
-  ];
+
 
   List<Widget> navigateList = [
     const AboutHiErbilScreen(),
@@ -76,9 +73,14 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final orientation = MediaQuery.of(context).orientation;
+    var locale = AppLocalizations.of(context)!;
+    List<ItemList> itemList = [
+      ItemList(svg: "assets/svg/about.svg", text: locale.aboutHiErbil!),
+      ItemList(svg: "assets/svg/setting.svg", text: locale.settings!),
+      ItemList(svg: "assets/svg/privacy.svg", text: locale.privacyAndPolicy!),
+    ];
     return Scaffold(
-      appBar: appBarWidgetType3("About", context, false, [], null),
+      appBar: appBarWidgetType3(locale.about!, context, false, [], null),
       body: Container(
         height: size.height,
         child: Stack(
@@ -213,7 +215,7 @@ class _AboutPageState extends State<AboutPage> with SingleTickerProviderStateMix
                     Padding(
                       padding: const EdgeInsets.only(top: 17),
                       child: Text(
-                        "Version 1.1.1 2023",
+                        "${locale.version!} 1.1.1 2023",
                         style: poppinsRegularTextStyle(
                             fontSize: 12, context: context, color: iconsColor),
                       ),

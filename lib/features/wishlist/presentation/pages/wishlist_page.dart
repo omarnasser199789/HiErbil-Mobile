@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_erbil_mobile/features/wishlist/presentation/pages/bloc/bloc.dart';
 
+import '../../../../Locale/locale.dart';
 import '../../../../core/globals.dart';
 import '../../../../core/widgets/app_bar_type3.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
@@ -82,13 +83,11 @@ class _WishlistPageState extends State<WishlistPage> with SingleTickerProviderSt
             BlocProvider.of<WishlistBloc>(context).add(GetWishlistEvent());
           }
           if(state is SuccessGetWishlist){
-
             wishlistEntity = state.wishlistEntity;
           }
-
-
+          var locale = AppLocalizations.of(context)!;
           return Scaffold(
-            appBar: appBarWidgetType3("Wishlist", context, false, [], null),
+            appBar: appBarWidgetType3(locale.wishlist!, context, false, [], null),
             body: Container(
               height: size.height,
               child: Stack(
@@ -168,7 +167,7 @@ class _WishlistPageState extends State<WishlistPage> with SingleTickerProviderSt
                                 ],
                               );
                             }):
-                        EmptyStateWidget(svg: 'assets/svg/NoWishlist.svg', text1: 'You don’t have any wishlists yet!',),
+                        EmptyStateWidget(svg: 'assets/svg/NoWishlist.svg', text1: locale.youDoNotHaveAny!,),
                       )
                   ),
                 ],

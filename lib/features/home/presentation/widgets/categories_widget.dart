@@ -28,8 +28,6 @@ class CategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var locale = AppLocalizations.of(context)!;
-
-
     return BlocProvider(
         create: (BuildContext context) => sl<HomeBloc>(),
         child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
@@ -134,6 +132,7 @@ class CategoriesListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var locale = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -152,7 +151,7 @@ class CategoriesListItem extends StatelessWidget {
             CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
               boxFit: BoxFit.fill,url: image,
             ):
-            Center(child: Text("More",style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
+            Center(child: Text(locale.more!,style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
           ),
 
           if(type2==null)

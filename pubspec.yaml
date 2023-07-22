@@ -93,6 +93,12 @@ flutter:
     - family: PoppinsRegular
       fonts:
         - asset: assets/fonts/Poppins-Regular.ttf
+    - family: RabarRegular
+      fonts:
+        - asset: assets/fonts/RABAR_Regular.TTF
+    - family: RabarBold
+      fonts:
+        - asset: assets/fonts/RABAR_Bold.TTF
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

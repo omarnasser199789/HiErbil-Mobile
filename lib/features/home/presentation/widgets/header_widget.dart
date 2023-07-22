@@ -34,17 +34,17 @@ class HeaderWidget extends StatelessWidget {
                   onTap: () {  }, title: '',isSearch: true,)),
 
 
-                const SizedBox(width: 20,),
-                Container(
-                    decoration: BoxDecoration(
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                      borderRadius: BorderRadius.circular(size.width),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: SvgPicture.asset("assets/svg/bill.svg",color: iconsColor,),
-                    )),
-
+                // const SizedBox(width: 20,),
+                // Container(
+                //     decoration: BoxDecoration(
+                //       color: Theme.of(context).scaffoldBackgroundColor,
+                //       borderRadius: BorderRadius.circular(size.width),
+                //     ),
+                //     child: Padding(
+                //       padding: const EdgeInsets.all(15),
+                //       child: SvgPicture.asset("assets/svg/bill.svg",color: iconsColor,),
+                //     )),
+                //
 
 
               ],

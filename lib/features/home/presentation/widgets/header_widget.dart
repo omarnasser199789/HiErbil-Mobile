@@ -12,7 +12,6 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     var locale = AppLocalizations.of(context)!;
     return SafeArea(
       bottom: false,

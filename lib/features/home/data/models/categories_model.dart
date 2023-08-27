@@ -4,13 +4,15 @@
 
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 import '../../../../core/classes/attachment.dart';
 import '../../domain/entities/categories_entity.dart';
 
 CategoriesModel categoriesModelFromJson(String str) => CategoriesModel.fromJson(json.decode(str));
 
 String categoriesModelToJson(CategoriesModel data) => json.encode(data.toJson());
-
+@immutable
 class CategoriesModel  extends CategoriesEntity{
   CategoriesModel({
     required this.data,

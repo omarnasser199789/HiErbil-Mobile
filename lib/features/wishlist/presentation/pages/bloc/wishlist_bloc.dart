@@ -1,8 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hi_erbil_mobile/features/posts/presentation/bloc/success_error/either_success_or_error.dart';
 import 'package:hi_erbil_mobile/features/wishlist/presentation/pages/bloc/success_error/either_success_or_error.dart';
 import '../../../domain/usecase/add_to_wishlist_usecase.dart';
-
 import '../../../domain/usecase/delete_from_fav_usecase.dart';
 import '../../../domain/usecase/get_all_wishlist_usecase.dart';
 import '../../../domain/usecase/is_fav_usecase.dart';
@@ -14,35 +12,15 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
   final IsFavUseCase isFavUseCase;
   final DeleteFromFavUseCase deleteFromFavUseCase;
 
-
-
-
-
-
-
   WishlistBloc({
     required AddToWishlistUseCase concreteAddToWishlistUseCase,
     required GetWishlistUseCase concreteGetWishlistUseCase,
     required IsFavUseCase concreteIsFavUseCase,
     required DeleteFromFavUseCase concreteDeleteFromFavUseCase,
-
-
-
-
-
-
-  })  : assert(
-  concreteAddToWishlistUseCase != null,
-        ),
-        addToWishlistUseCase = concreteAddToWishlistUseCase,
+   })  : addToWishlistUseCase = concreteAddToWishlistUseCase,
         getWishlistUseCase = concreteGetWishlistUseCase,
         isFavUseCase = concreteIsFavUseCase,
         deleteFromFavUseCase = concreteDeleteFromFavUseCase,
-
-
-
-
-
         super(Empty());
 
   @override
@@ -68,9 +46,6 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       final failureOrPhysician = await deleteFromFavUseCase(event.id);
       yield* SuccessDeleteFromFavOrErrorState(failureOrPhysician);
     }
-
-
-
 
   }
 }

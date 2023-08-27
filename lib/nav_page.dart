@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,7 +11,6 @@ import 'features/about/presentation/pages/about_page.dart';
 import 'core/globals.dart';
 import 'core/widgets/double_back_to_close_widget.dart';
 import 'features/map/presentation/pages/maps_page.dart';
-import 'features/map/presentation/pages/mpa_page.dart';
 import 'features/posts/presentation/pages/posts_page.dart';
 
 

@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final wishlistModel = wishlistModelFromJson(jsonString);
-
 import 'dart:convert';
 
 import '../../domain/entities/wishlist_entity.dart';

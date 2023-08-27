@@ -1,7 +1,5 @@
-import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hi_erbil_mobile/features/wishlist/domain/usecase/add_to_wishlist_usecase.dart';
-
 import '../../Theme/style.dart';
 import 'cached_net_work_image.dart';
 import 'fav_widget.dart';

@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/functions.dart';
@@ -13,6 +14,8 @@ import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
 import '../../../../injection_container.dart';
 import 'package:shimmer/shimmer.dart';
+
+import '../pages/test_page.dart';
 
 class BannerWidget extends StatefulWidget {
   const BannerWidget(
@@ -86,17 +89,24 @@ class _BannerWidgetState extends State<BannerWidget> {
                                 //   );
                                 // }
 
+                                // goTo(context, (context) => MasonryPage());
                                 // Update selectedIndexNotifier value
                                 selectedIndexNotifier.value = e.id;
                               },
                               child: SizedBox(
                                 height: widget.height,
-                                child: CachedNetWorkImage(
-                                  borderRadius: widget.borderRadius,
-                                  boxFit: BoxFit.fill,
-                                  url: (e.attachments.isNotEmpty)
-                                      ? s3Amazonaws + e.attachments[0].path
-                                      : null,
+                                child: Stack(
+                                  children: [
+                                    CachedNetWorkImage(
+                                      borderRadius: widget.borderRadius,
+                                      boxFit: BoxFit.fill,
+                                      url: (e.attachments.isNotEmpty)
+                                          ? s3Amazonaws + e.attachments[0].path
+                                          : null,
+                                    ),
+                                    if(!kReleaseMode)
+                                    Text("${e.id}")
+                                  ],
                                 ),
                               ),
                             ),

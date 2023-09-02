@@ -7,11 +7,16 @@ import 'core/globals.dart';
 import 'features/home/data/data_source/remot_data_sourse/home_remot_data_source.dart';
 import 'features/home/data/repositories/home_repository_impl.dart';
 import 'features/home/domain/repositories/home_repository.dart';
+import 'features/home/domain/usecase/get_all_products_usecase.dart';
 import 'features/home/domain/usecase/get_banners_usecase.dart';
 import 'features/home/domain/usecase/get_categories_usecase.dart';
 import 'features/home/domain/usecase/get_map_item_usecase.dart';
+import 'features/home/domain/usecase/get_newest_products_usecase.dart';
 import 'features/home/domain/usecase/get_place_by_id_usecase.dart';
 import 'features/home/domain/usecase/get_places_usecase.dart';
+import 'features/home/domain/usecase/get_product_by_id_usecase.dart';
+import 'features/home/domain/usecase/get_products_by_sub_cat_id_usecase.dart';
+import 'features/home/domain/usecase/get_sub_category.dart';
 import 'features/home/domain/usecase/get_tags_usecase.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
 import 'features/posts/data/data_source/remot_data_sourse/posts_remot_data_source.dart';
@@ -22,7 +27,6 @@ import 'features/posts/domain/usecase/get_post_useccacse.dart';
 import 'features/posts/presentation/bloc/posts_bloc.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-
 import 'features/wishlist/data/repositories/wishlist_repository_impl.dart';
 import 'features/wishlist/domain/usecase/add_to_wishlist_usecase.dart';
 import 'features/wishlist/domain/usecase/delete_from_fav_usecase.dart';
@@ -43,6 +47,11 @@ Future<void> init() async {
       concreteGetTagsUseCase:  sl(),
       concreteGetPlaceByIdUseCase: sl(),
       concreteGetMapItemsUseCase: sl(),
+      concreteGetSubCategoryUseCase: sl(),
+      concreteGetProductsBySubCatIdUseCase: sl(),
+      concreteGetProductsByIdUseCase: sl(),
+      concreteGetNewestProductsUseCase: sl(),
+      concreteGetAllProductsUseCase: sl(),
     ),
   );
   sl.registerFactory(
@@ -63,6 +72,11 @@ Future<void> init() async {
 
 
   ///Use cases
+  sl.registerLazySingleton(() => GetNewestProductsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetAllProductsUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetProductsByIdUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetProductsBySubCatIdUseCase(repository: sl()));
+  sl.registerLazySingleton(() => GetSubCategoryUseCase(repository: sl()));
   sl.registerLazySingleton(() => DeleteFromFavUseCase(repository: sl()));
   sl.registerLazySingleton(() => IsFavUseCase(repository: sl()));
   sl.registerLazySingleton(() => GetWishlistUseCase(repository: sl()));

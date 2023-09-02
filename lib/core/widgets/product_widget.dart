@@ -5,7 +5,7 @@ import 'cached_net_work_image.dart';
 import 'fav_widget.dart';
 
 class ProductWidget extends StatelessWidget {
-  const ProductWidget({Key? key, required this.enableFav,
+  const   ProductWidget({Key? key, required this.enableFav,
     required this.addProductToFavParams,
     required this.image,required this.onTap,required this.title}) : super(key: key);
   final bool enableFav;
@@ -22,21 +22,21 @@ class ProductWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            width: 167,
-            height: 158,
-            child: Stack(
-              alignment: Alignment.topRight,
-              children: [
-                CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
-                  boxFit: BoxFit.fill,url: image,),
-                if(enableFav)
-                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FavWidget(addProductToFavParams: addProductToFavParams,)
-                )
-              ],
-            ),
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              AspectRatio(
+                aspectRatio: 1.16,
+                child: CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
+                  boxFit: BoxFit.cover,url: image,),
+              ),
+
+              if(enableFav)
+               Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FavWidget(addProductToFavParams: addProductToFavParams,)
+              )
+            ],
           ),
 
           Padding(

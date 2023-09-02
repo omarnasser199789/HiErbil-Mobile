@@ -8,7 +8,10 @@ import 'package:hi_erbil_mobile/features/home/domain/entities/tags_entity.dart';
 
 import '../../domain/entities/banners_entity.dart';
 import '../../domain/entities/categories_entity.dart';
+import '../../domain/entities/get_sub_category_entity.dart';
 import '../../domain/entities/map_items_entity.dart';
+import '../../domain/entities/product_entity.dart';
+import '../../domain/entities/products_list_entity.dart';
 
 abstract class HomeState {}
 
@@ -44,8 +47,27 @@ class SuccessGetMapItems extends HomeState {
   SuccessGetMapItems({required this.mapItemsEntity});
 }
 
+class SuccessGetSubCategoryEntity extends HomeState {
+  List<SubCategoryEntity> list;
+  SuccessGetSubCategoryEntity({required this.list});
+}
+class SuccessGetProductsBySubCatIdEntity extends HomeState {
+  List<ProductEntity> list;
+  SuccessGetProductsBySubCatIdEntity({required this.list});
+}
+class SuccessGetNewestProductsEntity extends HomeState {
+  List<ProductEntity> list;
+  SuccessGetNewestProductsEntity({required this.list});
+}
+class SuccessGetAllProductsEntity extends HomeState {
+  ProductListEntity productListEntity;
+  SuccessGetAllProductsEntity({required this.productListEntity});
+}
 
-
+class SuccessGetProductsByIdEntity extends HomeState {
+  ProductEntity productEntity;
+  SuccessGetProductsByIdEntity({required this.productEntity});
+}
 
 class Error extends  HomeState {
   final String message;

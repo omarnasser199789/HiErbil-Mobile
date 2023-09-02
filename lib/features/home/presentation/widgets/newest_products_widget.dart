@@ -11,21 +11,17 @@ import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/waiting_widget.dart';
 import 'history_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../core/pages/product_page.dart';
+import '../pages/product_page.dart';
 import '../../data/models/places_model.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
 
-class SightsWidget extends StatelessWidget {
-   SightsWidget({Key? key}) : super(key: key);
-
+class NewestProductsWidget extends StatelessWidget {
+  NewestProductsWidget({Key? key}) : super(key: key);
 
   List<Widget> widgetList = [];
   List<Widget> rowList = [];
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,34 +33,26 @@ class SightsWidget extends StatelessWidget {
             print("Categories State IS $state");
           }
           if (state is Empty) {
-              BlocProvider.of<HomeBloc>(context).add(GetPlacesEvent(params: GetPlacesParams(type: "Sight")));
+              BlocProvider.of<HomeBloc>(context).add(GetNewestProductsEvent());
           }
           if(state is Loading){
             return const WaitingWidget();
           }
 
-          if (state is SuccessGetPlaces) {
-
-
-            for(var item in state.placesEntity.data){
-
+          if (state is SuccessGetNewestProductsEntity) {
+            for(var item in state.list){
                 rowList.add(GestureDetector(
                   onTap: (){
-                    goTo(context, (context) =>  ProductPage(title: item.title,
-                      id: item.id,));
+                    goTo(context, (context) =>  ProductPage(title: item.titleEn, id: item.id,));
                   },
-                  child: SightsItemList(
+                  child: NewestProductsItemList(
                     image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
-                    title: item.title,
-                    address: item.address,
-
+                    title: item.titleEn,
+                    address: "",
                   ),
                 ));
-
-
             }
-
-            widgetList.add(Text(locale.sights!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
+            widgetList.add(Text("Newest products",style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));
             widgetList.add(Padding(
               padding: const EdgeInsets.only(top:16),
               child: SingleChildScrollView(
@@ -98,8 +86,8 @@ class SightsWidget extends StatelessWidget {
   }
 }
 
-class SightsItemList extends StatelessWidget {
-  const SightsItemList({Key? key,this.image, required this.title,required this.address}) : super(key: key);
+class NewestProductsItemList extends StatelessWidget {
+  const NewestProductsItemList({Key? key,this.image, required this.title,required this.address}) : super(key: key);
   final String ? image;
   final String  title;
   final String  address;

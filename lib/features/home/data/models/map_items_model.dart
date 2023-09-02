@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import '../../../../core/classes/attachment.dart';
 import '../../domain/entities/map_items_entity.dart';
 
 MapItemsModel mapItemsModelFromJson(String str) => MapItemsModel.fromJson(json.decode(str));
@@ -66,25 +67,7 @@ class Datum {
   };
 }
 
-class Attachment {
-  int id;
-  String path;
 
-  Attachment({
-    required this.id,
-    required this.path,
-  });
-
-  factory Attachment.fromJson(Map<String, dynamic> json) => Attachment(
-    id: json["id"],
-    path: json["path"],
-  );
-
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "path": path,
-  };
-}
 
 class Tag {
   int id;

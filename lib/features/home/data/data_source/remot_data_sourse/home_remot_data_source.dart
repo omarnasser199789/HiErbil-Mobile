@@ -9,11 +9,13 @@ import '../../../domain/usecase/get_places_usecase.dart';
 import '../../models/categories_model.dart';
 import '../../models/map_items_model.dart';
 import '../../models/places_model.dart';
+import '../../models/product_model.dart';
+import '../../models/products_list_model.dart';
+import '../../models/sub_category_model.dart';
 import '../../models/tags_model.dart';
 import 'home_remote_data_functions.dart';
 
 abstract class HomeRemoteDataSource {
-
 
   Future<BannersModel> getBanners();
   Future<CategoriesModel> getCategories();
@@ -21,21 +23,20 @@ abstract class HomeRemoteDataSource {
   Future<TagsModel> getTags(int? catId);
   Future<PlaceModel> getPlaceById(int id);
   Future<MapItemsModel> getMapItems();
-
-
+  Future<List<SubCategoryModel>> getSubCategory(int id);
+  Future<List<ProductModel>> getProductBySubCatId(int id);
+  Future<List<ProductModel>> getNewestProducts();
+  Future<ProductListModel> getAllProducts();
+  Future<ProductModel> getProductById(int id);
 
 }
 
 class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   final http.Client client;
-  // final SharedPreferences sharedPreferences;
 
-  HomeRemoteDataSourceImpl({required this.client
-    // ,required this.sharedPreferences
-  });
+  HomeRemoteDataSourceImpl({required this.client});
 
-  HomeRemoteDataFunctions functions =
-  HomeRemoteDataFunctions();
+  HomeRemoteDataFunctions functions = HomeRemoteDataFunctions();
 
 
   @override
@@ -81,8 +82,30 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
     return functions.getMapItems('$baseUrl/getCategoriesForMap?pageSize=10&page=0');
   }
 
+  @override
+  Future<List<SubCategoryModel>> getSubCategory(int id) {
+    return functions.getSubCategory('$baseUrl/SubCategory/byCategory/$id');
+  }
 
+  @override
+  Future<List<ProductModel>> getProductBySubCatId(int id) {
+    return functions.getProductBySubCatId('$baseUrl/Product/list/$id');
+  }
 
+  @override
+  Future<ProductModel> getProductById(int id) {
+    return functions.getProductById('$baseUrl/Product/$id');
+  }
+
+  @override
+  Future<List<ProductModel>> getNewestProducts() {
+    return functions.getProductBySubCatId('$baseUrl/Product/newProducts');
+  }
+
+  @override
+  Future<ProductListModel> getAllProducts() {
+    return functions.getAllProducts('$baseUrl/Product?pageSize=10&page=0');
+  }
 
 
 }

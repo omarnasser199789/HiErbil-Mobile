@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hi_erbil_mobile/core/widgets/waiting_widget.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/widgets/places_to_go_widget.dart';
-import 'package:hi_erbil_mobile/features/home/presentation/widgets/sights_widget.dart';
-
-import '../../../../core/classes/debouncer.dart';
+import 'package:hi_erbil_mobile/features/home/presentation/widgets/newest_products_widget.dart';
 import '../../../../core/globals.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
-import '../../../../core/widgets/custom_text_field.dart';
 import '../../../../core/widgets/product_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../core/pages/product_page.dart';
+import 'product_page.dart';
 import '../../../wishlist/domain/usecase/add_to_wishlist_usecase.dart';
 import '../../domain/usecase/get_places_usecase.dart';
 import '../bloc/home_bloc.dart';
@@ -20,7 +17,6 @@ import '../bloc/home_state.dart';
 import '../widgets/banner_widget.dart';
 import '../widgets/categories_widget.dart';
 import '../widgets/header_widget.dart';
-import '../widgets/history_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +27,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
    TextEditingController  controller = TextEditingController();
-   final _debouncer = Debouncer(milliseconds: 500);
    bool allowSearch=false;
   @override
   Widget build(BuildContext context) {
@@ -46,7 +41,6 @@ class _HomePageState extends State<HomePage> {
           }
 
           if(controller.text != ""){
-            print("fdvdvd");
             print(controller.text);
           }
 
@@ -72,32 +66,26 @@ class _HomePageState extends State<HomePage> {
 
                                 Padding(
                                   padding:  EdgeInsets.only(top:18),
-                                  child: BannerWidget(padding:  EdgeInsets.only(left: 17,right: 17),height: size.height*0.35,borderRadius: BorderRadius.circular(10),),
+                                  child: BannerWidget(padding:  EdgeInsets.only(left: 17,right: 17),height: 200,borderRadius: BorderRadius.circular(10),),
                                 ),
 
-
                                 CategoriesWidget(),
-                                SightsWidget(),
-                                PlacesToGoWidget(),
+                                NewestProductsWidget(),
+                                AllProductsWidget(),
                                 const SizedBox(height: 100,),
                               ],
                             ),
 
-
-
                           if(controller.text!=""&& state is SuccessGetPlaces)
                             GridView.builder(
                                 physics: const NeverScrollableScrollPhysics(),
-                                padding: const EdgeInsets.only(
-                                    left: 17, right: 17, top: 31),
+                                padding: const EdgeInsets.only(left: 17, right: 17, top: 31),
                                 shrinkWrap: true,
                                 gridDelegate:
                                 SliverGridDelegateWithMaxCrossAxisExtent(
                                   maxCrossAxisExtent: 210, //210
                                   childAspectRatio:
-                                  (orientation == Orientation.landscape)
-                                      ? 0.83
-                                      : 0.9,
+                                  (orientation == Orientation.landscape) ? 0.83 : 0.9,
                                   crossAxisSpacing: 17,
                                   mainAxisSpacing: 17,
                                 ),
@@ -130,9 +118,6 @@ class _HomePageState extends State<HomePage> {
                           if(controller.text!=""&& state is Loading)
                             Center(child: WaitingWidget()),
 
-
-
-
                         ],
                       ),
                     ),
@@ -142,9 +127,6 @@ class _HomePageState extends State<HomePage> {
             ),
           );
         }));
-
-
-
 
   }
 }

@@ -5,8 +5,7 @@ import '../../../../Theme/style.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../domain/entities/categories_entity.dart';
-import '../widgets/category_page.dart';
-import '../widgets/category_section.dart';
+import 'category_page.dart';
 import '../../../../core/widgets/app_bar_type3.dart';
 
 class CategoriesPage extends StatelessWidget {

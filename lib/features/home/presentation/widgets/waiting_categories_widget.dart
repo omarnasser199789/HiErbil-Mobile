@@ -21,7 +21,7 @@ class WaitingCategoryWidget extends StatelessWidget {
             child: CategoriesListItem(
               title: "*******",
               image:null,
-              onTap: (){}),
+              onTap: (){}, id: -1,),
           ));
     }
     widgetList.add(Text(locale.categories!,style: poppinsSemiBoldTextStyle(fontSize: 15,context: context),));

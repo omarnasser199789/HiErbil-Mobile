@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../Theme/style.dart';
-import 'category_page.dart';
+import '../pages/category_page.dart';
 import '../../../posts/presentation/pages/posts_page.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';

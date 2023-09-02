@@ -11,7 +11,7 @@ import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/empty_state_widget.dart';
 import '../../../../core/widgets/product_widget.dart';
 import '../../../../injection_container.dart';
-import '../../../../core/pages/product_page.dart';
+import '../../../home/presentation/pages/product_page.dart';
 import '../../domain/entities/wishlist_entity.dart';
 import '../../domain/usecase/add_to_wishlist_usecase.dart';
 import 'bloc/wishlist_bloc.dart';

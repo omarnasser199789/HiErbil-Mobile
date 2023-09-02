@@ -6,7 +6,7 @@ import '../../../../core/functions.dart';
 import '../../../../core/globals.dart';
 import '../../../../core/widgets/app_bar_widget.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
-import '../../../../core/pages/product_page.dart';
+import '../../../home/presentation/pages/product_page.dart';
 import '../../data/models/blog_categories_model.dart';
 import '../pages/post_page.dart';
 

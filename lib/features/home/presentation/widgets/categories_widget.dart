@@ -5,17 +5,14 @@ import 'package:hi_erbil_mobile/features/home/presentation/pages/categories_page
 import 'package:hi_erbil_mobile/core/globals.dart';
 import 'package:hi_erbil_mobile/core/widgets/app_bar_widget.dart';
 import 'package:hi_erbil_mobile/features/home/presentation/widgets/waiting_categories_widget.dart';
-import 'package:shimmer/shimmer.dart';
-
 import '../../../../Locale/locale.dart';
 import '../../../../Theme/style.dart';
-import '../../../posts/presentation/pages/posts_page.dart';
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../injection_container.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_event.dart';
 import '../bloc/home_state.dart';
-import 'category_page.dart';
+import '../pages/category_page.dart';
 
 
 class CategoriesWidget extends StatelessWidget {
@@ -47,11 +44,8 @@ class CategoriesWidget extends StatelessWidget {
                       title: state.categoriesEntity.data[i].title,
                       image:(state.categoriesEntity.data[i].attachments.isNotEmpty)? s3Amazonaws+state.categoriesEntity.data[i].attachments[0].path:null,
                       onTap: (){
-
-                        goTo(context, (context) =>
-                            CategoryPage(title:state.categoriesEntity.data[i].title,id:state.categoriesEntity.data[i].id));
-
-                      },));
+                        goTo(context, (context) => CategoryPage(title:state.categoriesEntity.data[i].title,id:state.categoriesEntity.data[i].id));
+                      }, id: state.categoriesEntity.data[i].id,));
               }
 
 
@@ -62,19 +56,15 @@ class CategoriesWidget extends StatelessWidget {
                       title: item.title,
                       image:(item.attachments.isNotEmpty)? s3Amazonaws+item.attachments[0].path:null,
                       onTap: (){
-
-                        goTo(context, (context) =>
-                            CategoryPage(title:item.title,id:item.id));
-
-                      },));
+                        goTo(context, (context) => CategoryPage(title:item.title,id:item.id));
+                      }, id: item.id,));
 
               }
             }
 
-
             gridViewList.add( CategoriesListItem(type2: true,onTap: (){
               goTo(context, (context) =>   CategoriesPage(categoriesEntity:state.categoriesEntity));
-            },));
+            }, id: -1,));
 
 
 
@@ -124,10 +114,11 @@ class CategoriesWidget extends StatelessWidget {
 }
 
 class CategoriesListItem extends StatelessWidget {
-  const CategoriesListItem({Key? key,this.type2, this.title,this.image,required this.onTap}) : super(key: key);
+  const CategoriesListItem({Key? key,this.type2, this.title,this.image,required this.onTap,required this.id}) : super(key: key);
   final bool ? type2;
   final String  ?title;
   final String  ?image;
+  final int  id;
   final Function () onTap;
 
   @override
@@ -135,30 +126,36 @@ class CategoriesListItem extends StatelessWidget {
     var locale = AppLocalizations.of(context)!;
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          Container(
-            width: 110,
-            height: 108,
-            decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
-              borderRadius: BorderRadius.circular(10)
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 110,
+                height: 108,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).cardColor,
+                  borderRadius: BorderRadius.circular(10)
+                ),
 
 
-            child: (type2==null)?
-            CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
-              boxFit: BoxFit.fill,url: image,
-            ):
-            Center(child: Text(locale.more!,style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
+                child: (type2==null)?
+                CachedNetWorkImage(borderRadius: BorderRadius.circular(10),
+                  boxFit: BoxFit.fill,url: image,
+                ):
+                Center(child: Text(locale.more!,style: poppinsRegularTextStyle(fontSize: 16, context: context,color: Theme.of(context).primaryColor),)),
+              ),
+
+              if(type2==null)
+              Padding(
+                padding: const EdgeInsets.only(top:5),
+                child: Text(title!,style: poppinsMediumTextStyle(fontSize: 12,context: context,),maxLines: 1,),
+              )
+            ],
           ),
-
-          if(type2==null)
-          Padding(
-            padding: const EdgeInsets.only(top:5),
-            child: Text(title!,style: poppinsMediumTextStyle(fontSize: 12,context: context,),maxLines: 1,),
-          )
+           if(!kReleaseMode)
+            Text("$id")
         ],
       ),
     );

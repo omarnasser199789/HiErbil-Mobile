@@ -1,5 +1,3 @@
-
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,9 +6,10 @@ import 'error/failures.dart';
 
 import 'package:sqflite/sqflite.dart';
 
-// String baseUrl="http://192.168.224.127:3000";
-String baseUrl="https://hierbil.lucid-source.com";
-String s3Amazonaws="https://hierbil.s3.eu-north-1.amazonaws.com/";
+String baseUrl="http://192.168.171.215:3100";
+String s3Amazonaws="http://hi-erbil.s3.amazonaws.com/";
+// String baseUrl="https://hierbil.lucid-source.com";
+// String s3Amazonaws="https://hierbil.s3.eu-north-1.amazonaws.com/";
 late SharedPreferences globalSH;
 var timeout = 200;
 var lang='en';

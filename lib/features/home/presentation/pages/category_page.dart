@@ -9,7 +9,7 @@ import 'package:hi_erbil_mobile/features/home/presentation/bloc/bloc.dart';
 
 import '../../../../core/widgets/cached_net_work_image.dart';
 import '../../../../core/widgets/waiting_widget.dart';
-import 'global_style.dart';
+import '../widgets/global_style.dart';
 import '../../../../injection_container.dart';
 import '../bloc/home_bloc.dart';
 import '../bloc/home_state.dart';
@@ -45,44 +45,45 @@ class _CategoryPageState extends State<CategoryPage> {
           }
 
           if (state is Empty) {
-            BlocProvider.of<HomeBloc>(context).add(GetTagsEvent(catId: widget.id));/// => SuccessGetBlogCategories
+            BlocProvider.of<HomeBloc>(context).add(GetSubCategoryEvent(id: widget.id));/// => SuccessGetBlogCategories
           }
           if(state is Loading){
             return const WaitingWidget();
           }
 
-
-          if(state is SuccessGetTags){
+          if(state is SuccessGetSubCategoryEntity){
             tabs = [];
-            for (var item in state.tagsEntity.data) {
+            for (var item in state.list) {
               tabs.add(
                 Tab(
                   height: 80,
                   child: Align(
                     alignment: Alignment.center,
-                    child: Column(
+                    child: Stack(
                       children: [
-                        SizedBox(
-                          width: 50,
-                          height: 50,
-                          child: CachedNetWorkImage(
-                            borderRadius: BorderRadius.circular(10),
-                            boxFit: BoxFit.fill,
-                            url:(item.attachments.isNotEmpty)? s3Amazonaws + item.attachments[0].path:null,
-                          ),
+                        Column(
+                          children: [
+                            SizedBox(
+                              width: 60,
+                              height: 60,
+                              child: CachedNetWorkImage(
+                                borderRadius: BorderRadius.circular(10),
+                                boxFit: BoxFit.fill,
+                                url:(item.iconUrl.isNotEmpty)? s3Amazonaws + item.iconUrl:null,
+                              ),
+                            ),
+                            Text(item.title, maxLines: 1),
+                          ],
                         ),
-                        Text(item.title, maxLines: 1),
+                        if(!kReleaseMode)
+                          Text("${item.id}")
                       ],
                     ),
                   ),
                 ),
               );
 
-              tabBarViewList.add( GlobalStyle(tagPlaces:item.tagPlaces,catId:widget.id ,));
-
-
-
-
+              tabBarViewList.add(GlobalStyle(subCatId:item.id));
 
             }
             return Scaffold(
@@ -108,8 +109,8 @@ class _CategoryPageState extends State<CategoryPage> {
                                 labelColor: Theme.of(context).canvasColor,
                                 unselectedLabelColor: iconsColor,
                                 indicatorSize: TabBarIndicatorSize.tab,
-                                labelStyle:
-                                poppinsRegularTextStyle(fontSize: 12, context: context),
+                                labelStyle: poppinsRegularTextStyle(fontSize: 12, context: context),
+                                indicatorColor: Theme.of(context).primaryColor,
                                 tabs: tabs,
                               ),
                             ),
